@@ -38,5 +38,18 @@ namespace RitoAPI.Controllers
                 return NotFound();
             }
         }
-    }
+        [HttpGet("scores/{encryptedSummonerId}")]
+        public ActionResult<int> GetChampionMasteryScore(string encryptedSummonerId)
+        {
+            var championMasteryScore = _repository.GetChampionMasteryScore(encryptedSummonerId);
+            if (championMasteryScore != 0)
+            {
+                return Ok(championMasteryScore);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+    }   
 }
