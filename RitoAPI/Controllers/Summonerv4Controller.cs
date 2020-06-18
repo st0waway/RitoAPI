@@ -10,11 +10,25 @@ namespace RitoAPI.Controllers
     {
         private readonly Summonerv4Repo _repository = new Summonerv4Repo();
 
-        [HttpGet("{summonerName}")]
+        [HttpGet("by-name/{summonerName}")]
         public ActionResult<SummonerDTO> GetSummonerByName(string summonerName)
         {
             var summoner = _repository.GetSummonerByName(summonerName);
             if (summoner.Name != null)           
+            {
+                return Ok(summoner);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("by-account/{encryptedAccountId}")]
+        public ActionResult<SummonerDTO> GetSummonerByAccount(string encryptedAccountId)
+        {
+            var summoner = _repository.GetSummonerByAccount(encryptedAccountId);
+            if (summoner.Name != null)
             {
                 return Ok(summoner);
             }
