@@ -51,5 +51,19 @@ namespace RitoAPI.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("{encryptedSummonerId}")]
+        public ActionResult<SummonerDTO> GetSummonerBySummonerID(string encryptedSummonerId)
+        {
+            var summoner = _repository.GetSummonerBySummonerID(encryptedSummonerId);
+            if (summoner.Name != null)
+            {
+                return Ok(summoner);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
