@@ -37,5 +37,19 @@ namespace RitoAPI.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet("by-puuid/{encryptedPUUID}")]
+        public ActionResult<SummonerDTO> GetSummonerByPUUID(string encryptedPUUID)
+        {
+            var summoner = _repository.GetSummonerByPUUID(encryptedPUUID);
+            if (summoner.Name != null)
+            {
+                return Ok(summoner);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
