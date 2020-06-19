@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
 
 namespace RitoAPI.Controllers
-{    
+{
     [ApiController]
     public class Championv3Controller : ControllerBase
     {
