@@ -8,9 +8,10 @@ namespace RitoAPI.Repositories
 {
     public class ChampionMasteryv4Repo : iChampionMasteryv4Repo
     {
+        string apikey = "RGAPI-6bc0db09-5158-4b23-b364-7ec924315239";
         public List<ChampionMasteryDTO> GetChampionMasteryBySummoner(string encryptedSummonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -27,7 +28,7 @@ namespace RitoAPI.Repositories
 
         public ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + "?api_key=" + championId + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -44,7 +45,7 @@ namespace RitoAPI.Repositories
 
         public int GetChampionMasteryScore(string encryptedSummonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";

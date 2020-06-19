@@ -7,9 +7,10 @@ namespace RitoAPI.Repositories
 {
     public class Summonerv4Repo : iSummonerv4Repo
     {
+        string apikey = "RGAPI-6bc0db09-5158-4b23-b364-7ec924315239";
         public SummonerDTO GetSummonerByName(string userid)
-        {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + userid + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+        {            
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + userid + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -26,7 +27,7 @@ namespace RitoAPI.Repositories
 
         public SummonerDTO GetSummonerByAccount(string encryptedAccountId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + encryptedAccountId + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + encryptedAccountId + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -43,7 +44,7 @@ namespace RitoAPI.Repositories
 
         public SummonerDTO GetSummonerByPUUID(string encryptedPUUID)
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + encryptedPUUID + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + encryptedPUUID + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -60,7 +61,7 @@ namespace RitoAPI.Repositories
 
         public SummonerDTO GetSummonerBySummonerID(string encryptedSummonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + encryptedSummonerId + "?api_key=RGAPI-75739618-76ce-4799-9e42-fd41f67ef392";
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + encryptedSummonerId + "?api_key=" + apikey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
