@@ -8,7 +8,12 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class Summonerv4Controller : ControllerBase
     {
-        private readonly Summonerv4Repo _repository = new Summonerv4Repo();
+        private readonly Summonerv4Repo _repository;
+
+        public Summonerv4Controller(Summonerv4Repo summonerv4Repo)
+        {
+            _repository = summonerv4Repo;
+        }
 
         [HttpGet("by-name/{summonerName}")]
         public ActionResult<SummonerDTO> GetSummonerByName(string summonerName = "Lum1x")

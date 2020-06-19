@@ -7,7 +7,12 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class Championv3Controller : ControllerBase
     {
-        private readonly Championv3Repo _repository = new Championv3Repo();
+        private readonly Championv3Repo _repository;
+
+        public Championv3Controller(Championv3Repo championv3Repo)
+        {
+            _repository = championv3Repo;
+        }
 
         [HttpGet("champion-rotations")]
         public ActionResult<ChampionInfo> GetChampionInfo()

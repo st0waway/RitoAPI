@@ -9,7 +9,12 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class ChampionMasteryController : ControllerBase
     {
-        private readonly ChampionMasteryv4Repo _repository = new ChampionMasteryv4Repo();
+        private readonly ChampionMasteryv4Repo _repository;
+
+        public ChampionMasteryController(ChampionMasteryv4Repo championMasteryv4Repo)
+        {
+            _repository = championMasteryv4Repo;
+        }
 
         [HttpGet("by-summoner/{encryptedSummonerId}")]
         public ActionResult<List<ChampionMasteryDTO>> GetChamcpionMasteryBySummoner(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")

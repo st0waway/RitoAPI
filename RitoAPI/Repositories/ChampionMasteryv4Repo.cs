@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RitoAPI.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -8,10 +9,15 @@ namespace RitoAPI.Repositories
 {
     public class ChampionMasteryv4Repo : iChampionMasteryv4Repo
     {
-        string apikey = "RGAPI-6bc0db09-5158-4b23-b364-7ec924315239";
+        private readonly string _apiKey;
+
+        public ChampionMasteryv4Repo(IOptions<UserConfig> userConfigAccessor)
+        {
+            _apiKey = userConfigAccessor.Value.APIKey;
+        }        
         public List<ChampionMasteryDTO> GetChampionMasteryBySummoner(string encryptedSummonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + apikey;
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -28,7 +34,7 @@ namespace RitoAPI.Repositories
 
         public ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId +"?api_key=" + apikey;
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId +"?api_key=" + _apiKey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -45,7 +51,7 @@ namespace RitoAPI.Repositories
 
         public int GetChampionMasteryScore(string encryptedSummonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + apikey;
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
