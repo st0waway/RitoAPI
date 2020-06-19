@@ -6,5 +6,7 @@ namespace RitoAPI.Repositories
     interface iChampionMasteryv4Repo
     {
         List<ChampionMasteryDTO> GetChampionMasteryBySummoner(string encryptedSummonerId);
+        ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId);
+        int GetChampionMasteryScore(string encryptedSummonerId);
     }
 }
