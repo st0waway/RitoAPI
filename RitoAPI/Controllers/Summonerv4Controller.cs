@@ -11,7 +11,7 @@ namespace RitoAPI.Controllers
         private readonly Summonerv4Repo _repository = new Summonerv4Repo();
 
         [HttpGet("by-name/{summonerName}")]
-        public ActionResult<SummonerDTO> GetSummonerByName(string summonerName)
+        public ActionResult<SummonerDTO> GetSummonerByName(string summonerName = "Lum1x")
         {
             var summoner = _repository.GetSummonerByName(summonerName);
             if (summoner.Name != null)           
@@ -25,7 +25,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("by-account/{encryptedAccountId}")]
-        public ActionResult<SummonerDTO> GetSummonerByAccount(string encryptedAccountId)
+        public ActionResult<SummonerDTO> GetSummonerByAccount(string encryptedAccountId = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
             var summoner = _repository.GetSummonerByAccount(encryptedAccountId);
             if (summoner.Name != null)
@@ -39,7 +39,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("by-puuid/{encryptedPUUID}")]
-        public ActionResult<SummonerDTO> GetSummonerByPUUID(string encryptedPUUID)
+        public ActionResult<SummonerDTO> GetSummonerByPUUID(string encryptedPUUID = "6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA")
         {
             var summoner = _repository.GetSummonerByPUUID(encryptedPUUID);
             if (summoner.Name != null)
@@ -53,7 +53,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("{encryptedSummonerId}")]
-        public ActionResult<SummonerDTO> GetSummonerBySummonerID(string encryptedSummonerId)
+        public ActionResult<SummonerDTO> GetSummonerBySummonerID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
             var summoner = _repository.GetSummonerBySummonerID(encryptedSummonerId);
             if (summoner.Name != null)

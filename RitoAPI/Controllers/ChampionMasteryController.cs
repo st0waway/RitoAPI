@@ -12,7 +12,7 @@ namespace RitoAPI.Controllers
         private readonly ChampionMasteryv4Repo _repository = new ChampionMasteryv4Repo();
 
         [HttpGet("by-summoner/{encryptedSummonerId}")]
-        public ActionResult<List<ChampionMasteryDTO>> GetChamcpionMasteryBySummoner(string encryptedSummonerId)
+        public ActionResult<List<ChampionMasteryDTO>> GetChamcpionMasteryBySummoner(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
             var championMasteryList = _repository.GetChampionMasteryBySummoner(encryptedSummonerId);
             if (championMasteryList != null)
@@ -26,7 +26,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
-        public ActionResult<ChampionMasteryDTO> GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId)
+        public ActionResult<ChampionMasteryDTO> GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
         {
             var championMastery = _repository.GetChampionMasteryByPlayerIDandChampionID(encryptedSummonerId, championId);
             if (championMastery != null)
@@ -39,7 +39,7 @@ namespace RitoAPI.Controllers
             }
         }
         [HttpGet("scores/{encryptedSummonerId}")]
-        public ActionResult<int> GetChampionMasteryScore(string encryptedSummonerId)
+        public ActionResult<int> GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
             var championMasteryScore = _repository.GetChampionMasteryScore(encryptedSummonerId);
             if (championMasteryScore != 0)
