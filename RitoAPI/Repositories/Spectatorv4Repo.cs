@@ -31,5 +31,22 @@ namespace RitoAPI.Repositories
                 }
             }
         }
+
+        public FeaturedGames GetFeaturedGames()
+        {
+            var url = "https://euw1.api.riotgames.com/lol/spectator/v4/featured-games" + "?api_key=" + _apiKey;
+            var webRequest = WebRequest.Create(url) as HttpWebRequest;
+            webRequest.ContentType = "application/json";
+            webRequest.UserAgent = "Nothing";
+            using (var s = webRequest.GetResponse().GetResponseStream())
+            {
+                using (var sr = new StreamReader(s))
+                {
+                    var featuredGameInfoJson = sr.ReadToEnd();
+                    var gameInfo = JsonConvert.DeserializeObject<FeaturedGames>(gameInfoJson);
+                    return featuredGameInfo;
+                }
+            }
+        }
     }
 }
