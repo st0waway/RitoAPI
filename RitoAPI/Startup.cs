@@ -34,6 +34,7 @@ namespace RitoAPI
             services.AddSingleton<ChampionMasteryv4Repo>();
             services.AddSingleton<Championv3Repo>();
             services.AddSingleton<LeagueExpv4Repo>();
+            services.AddSingleton<LolStatusRepo>();
             services.AddSingleton<LolRankedv1Repo>();
             services.AddSingleton<Spectatorv4Repo>();
             services.AddSingleton<Summonerv4Repo>();
