@@ -43,7 +43,7 @@ namespace RitoAPI.Repositories
                 using (var sr = new StreamReader(s))
                 {
                     var featuredGameInfoJson = sr.ReadToEnd();
-                    var gameInfo = JsonConvert.DeserializeObject<FeaturedGames>(gameInfoJson);
+                    var featuredGameInfo = JsonConvert.DeserializeObject<FeaturedGames>(featuredGameInfoJson);
                     return featuredGameInfo;
                 }
             }

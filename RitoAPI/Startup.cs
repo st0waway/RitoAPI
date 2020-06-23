@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
+using RitoAPI.Repositories.Interfaces;
 
 namespace RitoAPI
 {
@@ -32,6 +33,7 @@ namespace RitoAPI
             services.Configure<UserConfig>(userConfig);
             services.AddSingleton<ChampionMasteryv4Repo>();
             services.AddSingleton<Championv3Repo>();
+            services.AddSingleton<LeagueExpv4Repo>();
             services.AddSingleton<Spectatorv4Repo>();
             services.AddSingleton<Summonerv4Repo>();
         }
