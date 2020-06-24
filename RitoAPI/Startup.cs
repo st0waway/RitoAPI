@@ -33,6 +33,7 @@ namespace RitoAPI
             services.Configure<UserConfig>(userConfig);
             services.AddSingleton<ChampionMasteryv4Repo>();
             services.AddSingleton<Championv3Repo>();
+            services.AddSingleton<Clashv1Repo>();
             services.AddSingleton<LeagueExpv4Repo>();
             services.AddSingleton<LolStatusRepo>();
             services.AddSingleton<LolRankedv1Repo>();
