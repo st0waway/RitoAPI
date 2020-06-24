@@ -6,11 +6,11 @@ using System.Net;
 
 namespace RitoAPI.Repositories
 {
-    public class Spectatorv4Repo
+    public class SpectatorRepo
     {
         private readonly string _apiKey;
 
-        public Spectatorv4Repo(IOptions<UserConfig> userConfigAccessor)
+        public SpectatorRepo(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
         }

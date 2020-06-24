@@ -3,7 +3,7 @@ using RitoAPI.Models;
 
 namespace RitoAPI.Repositories.Interfaces
 {
-    interface iLolRankedv1Repo
+    interface iLolRankedRepo
     {
         LeaderboardDto GetPlayersInMasterTier(string region);
     }

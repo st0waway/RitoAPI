@@ -7,11 +7,11 @@ namespace RitoAPI.Controllers
 {
     [Route("league-exp")]
     [ApiController]
-    public class LeagueExpv4Controller : ControllerBase
+    public class LeagueExpController : ControllerBase
     {
-        private readonly LeagueExpv4Repo _repository;
+        private readonly LeagueExpRepo _repository;
 
-        public LeagueExpv4Controller(LeagueExpv4Repo leagueExpv4)
+        public LeagueExpController(LeagueExpRepo leagueExpv4)
         {
             _repository = leagueExpv4;
         }

@@ -2,7 +2,7 @@
 
 namespace RitoAPI.Repositories
 {
-    interface iChampionv3Repo
+    interface iChampionRepo
     {
         ChampionInfo GetChampionInfo();
     }

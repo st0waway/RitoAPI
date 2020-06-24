@@ -2,7 +2,7 @@
 
 namespace RitoAPI.Repositories
 {
-    interface iSpectatorv4Repo
+    interface iSpectatorRepo
     {
         CurrentGameInfo GetGameInfo(string encryptedSummonerId);
         FeaturedGameInfo GetFeaturedGames();

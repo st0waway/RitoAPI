@@ -7,11 +7,11 @@ namespace RitoAPI.Controllers
 {
     [Route("clash")]
     [ApiController]
-    public class Clashv1Controller : ControllerBase
+    public class ClashController : ControllerBase
     {
-        private readonly Clashv1Repo _repository;
+        private readonly ClashRepo _repository;
 
-        public Clashv1Controller(Clashv1Repo clashv1Repo)
+        public ClashController(ClashRepo clashv1Repo)
         {
             _repository = clashv1Repo;
         }

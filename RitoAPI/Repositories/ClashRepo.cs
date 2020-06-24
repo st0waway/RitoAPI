@@ -5,19 +5,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace RitoAPI.Repositories.Interfaces
+namespace RitoAPI.Repositories
 {
-    public class LeagueExpv4Repo
+    public class ClashRepo
     {
         private readonly string _apiKey;
 
-        public LeagueExpv4Repo(IOptions<UserConfig> userConfigAccessor)
+        public ClashRepo(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
         }
-        public List<LeagueEntryDTO> GetLeagueExp(string queue, string tier, string division)
+        public List<ClashPlayerDto> GetActiveClashPlayers(string summonerId)
         {
-            var url = "https://euw1.api.riotgames.com/lol/league-exp/v4/entries/" + queue + "/" + tier + "/" + division + "?api_key=" + _apiKey;
+            var url = "https://euw1.api.riotgames.com//lol/clash/v1/players/by-summoner/" + summonerId + "?api_key=" + _apiKey;
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
             webRequest.ContentType = "application/json";
             webRequest.UserAgent = "Nothing";
@@ -25,9 +25,9 @@ namespace RitoAPI.Repositories.Interfaces
             {
                 using (var sr = new StreamReader(s))
                 {
-                    var LeagueExpJson = sr.ReadToEnd();
-                    var LeagueExp = JsonConvert.DeserializeObject<List<LeagueEntryDTO>>(LeagueExpJson);
-                    return LeagueExp;
+                    var ClashPlayersJson = sr.ReadToEnd();
+                    var ClashPlayers = JsonConvert.DeserializeObject<List<ClashPlayerDto>>(ClashPlayersJson);
+                    return ClashPlayers;
                 }
             }
         }

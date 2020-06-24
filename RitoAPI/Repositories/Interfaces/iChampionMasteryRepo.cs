@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RitoAPI.Repositories
 {
-    interface iChampionMasteryv4Repo
+    interface iChampionMasteryRepo
     {
         List<ChampionMasteryDTO> GetChampionMasteryBySummoner(string encryptedSummonerId);
         ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId);

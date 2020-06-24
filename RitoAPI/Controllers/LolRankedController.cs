@@ -6,11 +6,11 @@ namespace RitoAPI.Controllers
 {
     [Route("leaderboards")]
     [ApiController]
-    public class LolRankedv1Controller : ControllerBase
+    public class LolRankedController : ControllerBase
     {
-        private readonly LolRankedv1Repo _repository;
+        private readonly LolRankedRepo _repository;
 
-        public LolRankedv1Controller(LolRankedv1Repo lolRankedv1Repo)
+        public LolRankedController(LolRankedRepo lolRankedv1Repo)
         {
             _repository = lolRankedv1Repo;
         }

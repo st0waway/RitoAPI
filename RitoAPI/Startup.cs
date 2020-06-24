@@ -31,14 +31,14 @@ namespace RitoAPI
 
             var userConfig = _configuration.GetSection("UserConfig");
             services.Configure<UserConfig>(userConfig);
-            services.AddSingleton<ChampionMasteryv4Repo>();
-            services.AddSingleton<Championv3Repo>();
-            services.AddSingleton<Clashv1Repo>();
-            services.AddSingleton<LeagueExpv4Repo>();
+            services.AddSingleton<ChampionMasteryRepo>();
+            services.AddSingleton<ChampionRepo>();
+            services.AddSingleton<ClashRepo>();
+            services.AddSingleton<LeagueExpRepo>();
             services.AddSingleton<LolStatusRepo>();
-            services.AddSingleton<LolRankedv1Repo>();
-            services.AddSingleton<Spectatorv4Repo>();
-            services.AddSingleton<Summonerv4Repo>();
+            services.AddSingleton<LolRankedRepo>();
+            services.AddSingleton<SpectatorRepo>();
+            services.AddSingleton<SummonerRepo>();
         }        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

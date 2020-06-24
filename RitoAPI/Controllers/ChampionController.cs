@@ -5,13 +5,13 @@ using RitoAPI.Repositories;
 namespace RitoAPI.Controllers
 {
     [ApiController]
-    public class Championv3Controller : ControllerBase
+    public class ChampionController : ControllerBase
     {
-        private readonly Championv3Repo _repository;
+        private readonly ChampionRepo _repository;
 
-        public Championv3Controller(Championv3Repo championv3Repo)
+        public ChampionController(ChampionRepo championRepo)
         {
-            _repository = championv3Repo;
+            _repository = championRepo;
         }
 
         [HttpGet("champion-rotations")]

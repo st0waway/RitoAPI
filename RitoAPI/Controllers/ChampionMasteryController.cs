@@ -9,9 +9,9 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class ChampionMasteryController : ControllerBase
     {
-        private readonly ChampionMasteryv4Repo _repository;
+        private readonly ChampionMasteryRepo _repository;
 
-        public ChampionMasteryController(ChampionMasteryv4Repo championMasteryv4Repo)
+        public ChampionMasteryController(ChampionMasteryRepo championMasteryv4Repo)
         {
             _repository = championMasteryv4Repo;
         }

@@ -6,11 +6,11 @@ using System.Net;
 
 namespace RitoAPI.Repositories
 {
-    public class Championv3Repo: iChampionv3Repo
+    public class ChampionRepo: iChampionRepo
     {
         private readonly string _apiKey;
 
-        public Championv3Repo(IOptions<UserConfig> userConfigAccessor)
+        public ChampionRepo(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
         }       

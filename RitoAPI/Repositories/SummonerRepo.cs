@@ -6,11 +6,11 @@ using Microsoft.Extensions.Options;
 
 namespace RitoAPI.Repositories
 {
-    public class Summonerv4Repo : iSummonerv4Repo
+    public class SummonerRepo : iSummonerRepo
     {
         private readonly string _apiKey;        
 
-        public Summonerv4Repo(IOptions<UserConfig> userConfigAccessor)
+        public SummonerRepo(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
         }

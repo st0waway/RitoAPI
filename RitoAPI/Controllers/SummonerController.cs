@@ -6,11 +6,11 @@ namespace RitoAPI.Controllers
 {
     [Route("summoner")]
     [ApiController]
-    public class Summonerv4Controller : ControllerBase
+    public class SummonerController : ControllerBase
     {
-        private readonly Summonerv4Repo _repository;
+        private readonly SummonerRepo _repository;
 
-        public Summonerv4Controller(Summonerv4Repo summonerv4Repo)
+        public SummonerController(SummonerRepo summonerv4Repo)
         {
             _repository = summonerv4Repo;
         }

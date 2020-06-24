@@ -2,7 +2,7 @@
 
 namespace RitoAPI.Repositories
 {
-    interface iSummonerv4Repo
+    interface iSummonerRepo
     {
         SummonerDTO GetSummonerByName(string userid);
         SummonerDTO GetSummonerByAccount(string encryptedAccountId);

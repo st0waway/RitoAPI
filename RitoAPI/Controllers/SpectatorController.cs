@@ -5,11 +5,11 @@ using RitoAPI.Repositories;
 namespace RitoAPI.Controllers
 {    
     [ApiController]
-    public class Spectatorv4Controller : ControllerBase
+    public class SpectatorController : ControllerBase
     {
-        private readonly Spectatorv4Repo _repository;
+        private readonly SpectatorRepo _repository;
 
-        public Spectatorv4Controller(Spectatorv4Repo spectatorv4Repo)
+        public SpectatorController(SpectatorRepo spectatorv4Repo)
         {
             _repository = spectatorv4Repo;
         }

@@ -6,11 +6,11 @@ using System.Net;
 
 namespace RitoAPI.Repositories
 {
-    public class LolRankedv1Repo
+    public class LolRankedRepo
     {
         private readonly string _apiKey;
 
-        public LolRankedv1Repo(IOptions<UserConfig> userConfigAccessor)
+        public LolRankedRepo(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
         }
