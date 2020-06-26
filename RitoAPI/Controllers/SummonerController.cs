@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
+using System.IO;
+using System.Net;
 
 namespace RitoAPI.Controllers
 {
@@ -8,25 +12,40 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class SummonerController : ControllerBase
     {
-        private readonly SummonerRepo _repository;
+        private readonly string _apiKey;
 
-        public SummonerController(SummonerRepo summonerv4Repo)
+        public SummonerController(IOptions<UserConfig> userConfigAccessor, SummonerRepo summonerv4Repo)
         {
+            _apiKey = userConfigAccessor.Value.APIKey;
             _repository = summonerv4Repo;
         }
+
+        private readonly SummonerRepo _repository;
 
         [HttpGet("by-name/{summonerName}")]
         public ActionResult<SummonerDTO> GetSummonerByName(string summonerName = "Lum1x")
         {
-            var summoner = _repository.GetSummonerByName(summonerName);
-            if (summoner.Name != null)           
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + _apiKey;
+
+            try
             {
-                return Ok(summoner);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var summonerAsJson = sr.ReadToEnd();
+                        var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
+                        return Ok(summoner);
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
-            }
+                return NotFound(e.Message);
+            }  
         }
 
         [HttpGet("by-account/{encryptedAccountId}")]
