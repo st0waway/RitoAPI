@@ -75,15 +75,27 @@ namespace RitoAPI.Controllers
         [HttpGet("by-puuid/{encryptedPUUID}")]
         public ActionResult<SummonerDTO> GetSummonerByPUUID(string encryptedPUUID = "6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA")
         {
-            var summoner = _repository.GetSummonerByPUUID(encryptedPUUID);
-            if (summoner.Name != null)
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + encryptedPUUID + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(summoner);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var summonerAsJson = sr.ReadToEnd();
+                        var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
+                        return summoner;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
+
         }
 
         [HttpGet("{encryptedSummonerId}")]

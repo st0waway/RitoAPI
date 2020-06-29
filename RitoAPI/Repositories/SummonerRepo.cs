@@ -15,23 +15,6 @@ namespace RitoAPI.Repositories
             _apiKey = userConfigAccessor.Value.APIKey;
         } 
 
-        public SummonerDTO GetSummonerByPUUID(string encryptedPUUID)
-        {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + encryptedPUUID + "?api_key=" + _apiKey;
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Nothing";
-            using (var s = webRequest.GetResponse().GetResponseStream())
-            {
-                using (var sr = new StreamReader(s))
-                {
-                    var summonerAsJson = sr.ReadToEnd();
-                    var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
-                    return summoner;
-                }
-            }
-        }
-
         public SummonerDTO GetSummonerBySummonerID(string encryptedSummonerId)
         {
             var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + encryptedSummonerId + "?api_key=" + _apiKey;
