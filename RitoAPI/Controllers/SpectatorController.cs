@@ -41,7 +41,23 @@ namespace RitoAPI.Controllers
             }
             catch (WebException e)
             {
-                return NotFound(e.Message);
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = e.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        var code = (int)response.StatusCode;
+                        return StatusCode(code);
+                    }
+                    else
+                    {
+                        return StatusCode(500);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500);
+                }
             }
         }
         [HttpGet("featured-games")]
