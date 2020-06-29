@@ -3,7 +3,6 @@
 namespace RitoAPI.Repositories
 {
     interface iSummonerRepo
-    {   
-        SummonerDTO GetSummonerBySummonerID(string encryptedSummonerId);
+    {
     }
 }

@@ -101,14 +101,25 @@ namespace RitoAPI.Controllers
         [HttpGet("{encryptedSummonerId}")]
         public ActionResult<SummonerDTO> GetSummonerBySummonerID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
-            var summoner = _repository.GetSummonerBySummonerID(encryptedSummonerId);
-            if (summoner.Name != null)
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + encryptedSummonerId + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(summoner);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var summonerAsJson = sr.ReadToEnd();
+                        var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
+                        return summoner;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
     }
