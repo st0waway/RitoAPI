@@ -15,23 +15,6 @@ namespace RitoAPI.Repositories
             _apiKey = userConfigAccessor.Value.APIKey;
         }
 
-        public CurrentGameInfo GetGameInfo(string encryptedSummonerId)
-        {
-            var url = "https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Nothing";
-            using (var s = webRequest.GetResponse().GetResponseStream())
-            {
-                using (var sr = new StreamReader(s))
-                {
-                    var gameInfoJson = sr.ReadToEnd();
-                    var gameInfo = JsonConvert.DeserializeObject<CurrentGameInfo>(gameInfoJson);
-                    return gameInfo;
-                }
-            }
-        }
-
         public FeaturedGames GetFeaturedGames()
         {
             var url = "https://euw1.api.riotgames.com/lol/spectator/v4/featured-games" + "?api_key=" + _apiKey;
