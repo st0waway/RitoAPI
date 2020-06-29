@@ -22,10 +22,10 @@ namespace RitoAPI.Controllers
 
         private readonly SummonerRepo _repository;
 
-        [HttpGet("by-name/{summonerName}")]
-        public ActionResult<SummonerDTO> GetSummonerByName(string summonerName = "Lum1x")
+        [HttpGet("name/{name}")]
+        public ActionResult<SummonerDTO> GetSummonerByName(string name = "Lum1x")
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + _apiKey;
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + name + "?api_key=" + _apiKey;
             try
             {
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
@@ -47,10 +47,10 @@ namespace RitoAPI.Controllers
             }
         }
 
-        [HttpGet("by-account/{encryptedAccountId}")]
-        public ActionResult<SummonerDTO> GetSummonerByAccount(string encryptedAccountId = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
+        [HttpGet("accountId/{accountId}")]
+        public ActionResult<SummonerDTO> GetSummonerByAccount(string accountId = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + encryptedAccountId + "?api_key=" + _apiKey;
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + accountId + "?api_key=" + _apiKey;
             try
             {
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
@@ -72,10 +72,10 @@ namespace RitoAPI.Controllers
             }
         }
 
-        [HttpGet("by-puuid/{encryptedPUUID}")]
-        public ActionResult<SummonerDTO> GetSummonerByPUUID(string encryptedPUUID = "6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA")
+        [HttpGet("puuid/{puuid}")]
+        public ActionResult<SummonerDTO> GetSummonerByPUUID(string puuid = "6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA")
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + encryptedPUUID + "?api_key=" + _apiKey;
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + puuid + "?api_key=" + _apiKey;
             try
             {
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
@@ -98,10 +98,10 @@ namespace RitoAPI.Controllers
 
         }
 
-        [HttpGet("{encryptedSummonerId}")]
-        public ActionResult<SummonerDTO> GetSummonerBySummonerID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+        [HttpGet("id/{id}")]
+        public ActionResult<SummonerDTO> GetSummonerBySummonerID(string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
-            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + encryptedSummonerId + "?api_key=" + _apiKey;
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + id + "?api_key=" + _apiKey;
             try
             {
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
