@@ -26,7 +26,6 @@ namespace RitoAPI.Controllers
         public ActionResult<SummonerDTO> GetSummonerByName(string summonerName = "Lum1x")
         {
             var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + _apiKey;
-
             try
             {
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
@@ -45,20 +44,31 @@ namespace RitoAPI.Controllers
             catch (WebException e)
             {
                 return NotFound(e.Message);
-            }  
+            }
         }
 
         [HttpGet("by-account/{encryptedAccountId}")]
         public ActionResult<SummonerDTO> GetSummonerByAccount(string encryptedAccountId = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
-            var summoner = _repository.GetSummonerByAccount(encryptedAccountId);
-            if (summoner.Name != null)
+            var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + encryptedAccountId + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(summoner);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var summonerAsJson = sr.ReadToEnd();
+                        var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
+                        return summoner;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
