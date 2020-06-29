@@ -1,7 +1,4 @@
 ﻿using RitoAPI.Models;
-using System.Net;
-using System.IO;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
 
 namespace RitoAPI.Repositories
