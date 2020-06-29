@@ -16,7 +16,7 @@ namespace RitoAPI.Controllers
 
         public SpectatorController(IOptions<UserConfig> userConfigAccessor, SpectatorRepo spectatorv4Repo)
         {
-            _apiKey = userConfigAccessor.Value.APIKey; 
+            _apiKey = userConfigAccessor.Value.APIKey;
             _repository = spectatorv4Repo;
         }
 
@@ -63,14 +63,41 @@ namespace RitoAPI.Controllers
         [HttpGet("featured-games")]
         public ActionResult<FeaturedGames> GetFeaturedGames()
         {
-            var featuredGameInfo = _repository.GetFeaturedGames();
-            if (featuredGameInfo != null)
+            var url = "https://euw1.api.riotgames.com/lol/spectator/v4/featured-games" + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(featuredGameInfo);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var featuredGameInfoJson = sr.ReadToEnd();
+                        var featuredGameInfo = JsonConvert.DeserializeObject<FeaturedGames>(featuredGameInfoJson);
+                        return featuredGameInfo;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = e.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        var code = (int)response.StatusCode;
+                        return StatusCode(code);
+                    }
+                    else
+                    {
+                        return StatusCode(500);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500);
+                }
             }
         }
     }
