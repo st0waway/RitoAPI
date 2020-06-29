@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using RitoAPI.Models;
+using RitoAPI.Repositories.Interfaces;
 
 namespace RitoAPI.Repositories
 {
-    public class LolStatusRepo
+    public class LolStatusRepo : iLolStatusRepo
     {
         private readonly string _apiKey;
 

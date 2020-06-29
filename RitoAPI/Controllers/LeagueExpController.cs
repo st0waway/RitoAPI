@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RitoAPI.Models;
-using RitoAPI.Repositories.Interfaces;
+using RitoAPI.Repositories;
 using System.Collections.Generic;
 
 namespace RitoAPI.Controllers

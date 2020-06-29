@@ -1,5 +1,4 @@
-﻿
-using RitoAPI.Models;
+﻿using RitoAPI.Models;
 
 namespace RitoAPI.Repositories.Interfaces
 {

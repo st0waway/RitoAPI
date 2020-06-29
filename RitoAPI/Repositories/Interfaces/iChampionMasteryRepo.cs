@@ -1,7 +1,7 @@
 ﻿using RitoAPI.Models;
 using System.Collections.Generic;
 
-namespace RitoAPI.Repositories
+namespace RitoAPI.Repositories.Interfaces
 {
     interface iChampionMasteryRepo
     {

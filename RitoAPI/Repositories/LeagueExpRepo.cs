@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RitoAPI.Models;
+using RitoAPI.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace RitoAPI.Repositories.Interfaces
+namespace RitoAPI.Repositories
 {
-    public class LeagueExpRepo
+    public class LeagueExpRepo : iLeagueExpRepo
     {
         private readonly string _apiKey;
 

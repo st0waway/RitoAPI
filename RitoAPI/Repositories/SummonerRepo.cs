@@ -1,5 +1,6 @@
 ﻿using RitoAPI.Models;
 using Microsoft.Extensions.Options;
+using RitoAPI.Repositories.Interfaces;
 
 namespace RitoAPI.Repositories
 {

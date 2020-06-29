@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using RitoAPI.Models;
+using RitoAPI.Repositories.Interfaces;
 
 namespace RitoAPI.Repositories
 {
-    public class SpectatorRepo
+    public class SpectatorRepo : iSpectatorRepo
+
     {
         private readonly string _apiKey;
 

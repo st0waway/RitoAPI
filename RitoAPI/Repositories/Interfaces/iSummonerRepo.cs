@@ -1,4 +1,4 @@
-﻿namespace RitoAPI.Repositories
+﻿namespace RitoAPI.Repositories.Interfaces
 {
     interface iSummonerRepo
     {

@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RitoAPI.Models;
+using RitoAPI.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
 namespace RitoAPI.Repositories
 {
-    public class ClashRepo
+    public class ClashRepo : iClashRepo
     {
         private readonly string _apiKey;
 

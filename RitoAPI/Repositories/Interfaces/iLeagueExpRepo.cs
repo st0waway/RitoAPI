@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace RitoAPI.Repositories.Interfaces
 {
-    interface iClashRepo
+    interface iLeagueExpRepo
     {
-        List<ClashPlayerDto> GetActiveClashPlayers(string summonerId);
+        List<LeagueEntryDTO> GetLeagueExp(string queue, string tier, string division);
     }
 }

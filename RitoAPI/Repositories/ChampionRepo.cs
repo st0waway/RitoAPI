@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RitoAPI.Models;
+using RitoAPI.Repositories.Interfaces;
 using System.IO;
 using System.Net;
 
 namespace RitoAPI.Repositories
 {
-    public class ChampionRepo: iChampionRepo
+    public class ChampionRepo : iChampionRepo
     {
         private readonly string _apiKey;
 

@@ -1,6 +1,6 @@
 ﻿using RitoAPI.Models;
 
-namespace RitoAPI.Repositories
+namespace RitoAPI.Repositories.Interfaces
 {
     interface iChampionRepo
     {
