@@ -11,9 +11,9 @@ namespace RitoAPI.Controllers
     {
         private readonly ChampionMasteryRepo _repository;
 
-        public ChampionMasteryController(ChampionMasteryRepo championMasteryv4Repo)
+        public ChampionMasteryController(ChampionMasteryRepo championMasteryRepo)
         {
-            _repository = championMasteryv4Repo;
+            _repository = championMasteryRepo;
         }
 
         [HttpGet("by-summoner/{encryptedSummonerId}")]

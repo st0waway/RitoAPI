@@ -14,10 +14,10 @@ namespace RitoAPI.Controllers
         private readonly SpectatorRepo _repository;
         private readonly string _apiKey;
 
-        public SpectatorController(IOptions<UserConfig> userConfigAccessor, SpectatorRepo spectatorv4Repo)
+        public SpectatorController(IOptions<UserConfig> userConfigAccessor, SpectatorRepo spectatorRepo)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
-            _repository = spectatorv4Repo;
+            _repository = spectatorRepo;
         }
 
         [HttpGet("spectate/{id}")]

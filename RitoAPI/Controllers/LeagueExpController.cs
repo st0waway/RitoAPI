@@ -16,10 +16,10 @@ namespace RitoAPI.Controllers
         private readonly LeagueExpRepo _repository;
         private readonly string _apiKey;
 
-        public LeagueExpController(IOptions<UserConfig> userConfigAccessor, LeagueExpRepo leagueExpv4)
+        public LeagueExpController(IOptions<UserConfig> userConfigAccessor, LeagueExpRepo leagueExp)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
-            _repository = leagueExpv4;
+            _repository = leagueExp;
         }
 
         [HttpGet("{queue}/{tier}/{division}")]
