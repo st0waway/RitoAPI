@@ -39,14 +39,41 @@ namespace RitoAPI.Controllers
         [HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
         public ActionResult<ChampionMasteryDTO> GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
         {
-            var championMastery = _repository.GetChampionMasteryByPlayerIDandChampionID(encryptedSummonerId, championId);
-            if (championMastery != null)
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(championMastery);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var championMasteryJson = sr.ReadToEnd();
+                        var championMastery = JsonConvert.DeserializeObject<ChampionMasteryDTO>(championMasteryJson);
+                        return championMastery;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = e.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        var code = (int)response.StatusCode;
+                        return StatusCode(code);
+                    }
+                    else
+                    {
+                        return StatusCode(500);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500);
+                }
             }
         }
         [HttpGet("scores/{encryptedSummonerId}")]
