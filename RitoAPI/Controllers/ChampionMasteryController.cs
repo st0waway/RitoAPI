@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 
 namespace RitoAPI.Controllers
 {
@@ -10,9 +14,11 @@ namespace RitoAPI.Controllers
     public class ChampionMasteryController : ControllerBase
     {
         private readonly ChampionMasteryRepo _repository;
+        private readonly string _apiKey;
 
-        public ChampionMasteryController(ChampionMasteryRepo championMasteryRepo)
+        public ChampionMasteryController(IOptions<UserConfig> userConfigAccessor, ChampionMasteryRepo championMasteryRepo)
         {
+            _apiKey = userConfigAccessor.Value.APIKey;
             _repository = championMasteryRepo;
         }
 
@@ -46,15 +52,43 @@ namespace RitoAPI.Controllers
         [HttpGet("scores/{encryptedSummonerId}")]
         public ActionResult<int> GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
-            var championMasteryScore = _repository.GetChampionMasteryScore(encryptedSummonerId);
-            if (championMasteryScore != 0)
+
+            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
+            try
             {
-                return Ok(championMasteryScore);
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var championMasteryJson = sr.ReadToEnd();
+                        var championMastery = JsonConvert.DeserializeObject<int>(championMasteryJson);
+                        return championMastery;
+                    }
+                }
             }
-            else
+            catch (WebException e)
             {
-                return NotFound();
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = e.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        var code = (int)response.StatusCode;
+                        return StatusCode(code);
+                    }
+                    else
+                    {
+                        return StatusCode(500);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500);
+                }
             }
         }
-    }   
+    }
 }

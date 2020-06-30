@@ -49,22 +49,5 @@ namespace RitoAPI.Repositories
                 }
             }
         }
-
-        public int GetChampionMasteryScore(string encryptedSummonerId)
-        {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Nothing";
-            using (var s = webRequest.GetResponse().GetResponseStream())
-            {
-                using (var sr = new StreamReader(s))
-                {
-                    var championMasteryJson = sr.ReadToEnd();
-                    var championMastery = JsonConvert.DeserializeObject<int>(championMasteryJson);
-                    return championMastery;
-                }
-            }
-        }        
     }
 }
