@@ -39,6 +39,7 @@ namespace RitoAPI
             services.AddSingleton<LolRankedRepo>();
             services.AddSingleton<SpectatorRepo>();
             services.AddSingleton<SummonerRepo>();
+            services.AddSingleton<MatchRepo>();
         }        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
