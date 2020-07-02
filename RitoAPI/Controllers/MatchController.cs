@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -38,6 +37,47 @@ namespace RitoAPI.Controllers
                         var gameInfoJson = sr.ReadToEnd();
                         var gameInfo = JsonConvert.DeserializeObject<MatchlistDto>(gameInfoJson);
                         return gameInfo;
+                    }
+                }
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var response = e.Response as HttpWebResponse;
+                    if (response != null)
+                    {
+                        var code = (int)response.StatusCode;
+                        return StatusCode(code);
+                    }
+                    else
+                    {
+                        return StatusCode(500);
+                    }
+                }
+                else
+                {
+                    return StatusCode(500);
+                }
+            }
+        }
+
+        [HttpGet("/by-matchid/{matchid}")]
+        public ActionResult<MatchDto> GetMatchById(string matchid = "4688093085")
+        {
+            var url = "https://euw1.api.riotgames.com/lol/match/v4/matches/" + matchid + "?api_key=" + _apiKey;
+            try
+            {
+                var webRequest = WebRequest.Create(url) as HttpWebRequest;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                using (var s = webRequest.GetResponse().GetResponseStream())
+                {
+                    using (var sr = new StreamReader(s))
+                    {
+                        var matchJson = sr.ReadToEnd();
+                        var match = JsonConvert.DeserializeObject<MatchDto>(matchJson);
+                        return match;
                     }
                 }
             }
