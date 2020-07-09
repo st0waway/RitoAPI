@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
-using RitoAPI.Repositories.Interfaces;
 
 namespace RitoAPI
 {

@@ -12,13 +12,11 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class SummonerController : ControllerBase
     {
-        private readonly SummonerRepo _repository;
         private readonly string _apiKey;
 
-        public SummonerController(IOptions<UserConfig> userConfigAccessor, SummonerRepo summonerRepo)
+        public SummonerController(IOptions<UserConfig> userConfigAccessor)
         {
             _apiKey = userConfigAccessor.Value.APIKey;
-            _repository = summonerRepo;
         }
 
         [HttpGet("name/{name}")]
