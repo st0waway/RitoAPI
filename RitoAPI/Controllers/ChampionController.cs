@@ -15,7 +15,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("champion-rotations")]
-        public ActionResult<ChampionInfo> GetFreeChampionInfo()
+        public IActionResult GetFreeChampionInfo()
         {
             {
                 var freeChampRotation = _championService.GetFreeChampionInfo();

@@ -22,60 +22,33 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("by-summoner/{encryptedSummonerId}")]
-        public ActionResult<List<ChampionMasteryDTO>> GetChamcpionMasteryBySummoner(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+        public IActionResult GetChamcpionMasteryBySummoner(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
-            var freeChampRotation = _championMasteryService.GetChamcpionMasteryBySummoner(encryptedSummonerId);
+            var championMasteries = _championMasteryService.GetChamcpionMasteryBySummoner(encryptedSummonerId);
 
-            if (freeChampRotation == null)
+            if (championMasteries == null)
             {
                 return BadRequest();
             }
 
-            return Ok(freeChampRotation);
+            return Ok(championMasteries);
         }
 
         [HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
-        public ActionResult<ChampionMasteryDTO> GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
+        public IActionResult GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
         {
-            var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=";
-            try
+            var championMasteries = _championMasteryService.GetChampionMasteryByPlayerIDandChampionID(encryptedSummonerId, championId);
+
+            if (championMasteries == null)
             {
-                var webRequest = WebRequest.Create(url) as HttpWebRequest;
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Nothing";
-                using (var s = webRequest.GetResponse().GetResponseStream())
-                {
-                    using (var sr = new StreamReader(s))
-                    {
-                        var championMasteryJson = sr.ReadToEnd();
-                        var championMastery = JsonConvert.DeserializeObject<ChampionMasteryDTO>(championMasteryJson);
-                        return championMastery;
-                    }
-                }
+                return BadRequest();
             }
-            catch (WebException e)
-            {
-                if (e.Status == WebExceptionStatus.ProtocolError)
-                {
-                    var response = e.Response as HttpWebResponse;
-                    if (response != null)
-                    {
-                        var code = (int)response.StatusCode;
-                        return StatusCode(code);
-                    }
-                    else
-                    {
-                        return StatusCode(500);
-                    }
-                }
-                else
-                {
-                    return StatusCode(500);
-                }
-            }
+
+            return Ok(championMasteries);
         }
+
         [HttpGet("scores/{encryptedSummonerId}")]
-        public ActionResult<int> GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+        public IActionResult GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
         {
 
             var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=";
@@ -90,7 +63,7 @@ namespace RitoAPI.Controllers
                     {
                         var championMasteryJson = sr.ReadToEnd();
                         var championMastery = JsonConvert.DeserializeObject<int>(championMasteryJson);
-                        return championMastery;
+                        return Ok(championMastery);
                     }
                 }
             }
