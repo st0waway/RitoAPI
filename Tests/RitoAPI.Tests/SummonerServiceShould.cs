@@ -23,5 +23,15 @@ namespace RitoAPI.Tests
 			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);
 			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
 		}
+
+		[Fact]
+		public void GetSummonerByAccount()
+		{
+			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
+			var summoner = service.GetSummonerByAccount("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw");
+			Assert.IsType<SummonerDTO>(summoner);
+			Assert.Equal("LumiX", summoner.Name);
+			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
+		}
 	}
 }
