@@ -18,10 +18,11 @@ namespace RitoAPI.Tests
 		public void GetSummonerByName()
 		{
 			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var summoner = service.GetSummonerByName("Lumix");
+			var summoner = service.GetSummonerByName("LumiX");
 			Assert.IsType<SummonerDTO>(summoner);			
 			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);
 			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
+			Assert.Equal("uTkDriAmEwNbyev-RAdu8mppfJyrVhL393CvxYp6OMt0IyL4OzeYHVN9nbQMtpPhcIKmpJSfRjuDJg", summoner.Puuid);
 		}
 
 		[Fact]
@@ -31,6 +32,18 @@ namespace RitoAPI.Tests
 			var summoner = service.GetSummonerByAccount("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw");
 			Assert.IsType<SummonerDTO>(summoner);
 			Assert.Equal("LumiX", summoner.Name);
+			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
+			Assert.Equal("uTkDriAmEwNbyev-RAdu8mppfJyrVhL393CvxYp6OMt0IyL4OzeYHVN9nbQMtpPhcIKmpJSfRjuDJg", summoner.Puuid);
+		}
+
+		[Fact]
+		public void GetSummonerByPUUID()
+		{
+			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
+			var summoner = service.GetSummonerByPUUID("uTkDriAmEwNbyev-RAdu8mppfJyrVhL393CvxYp6OMt0IyL4OzeYHVN9nbQMtpPhcIKmpJSfRjuDJg");
+			Assert.IsType<SummonerDTO>(summoner);
+			Assert.Equal("LumiX", summoner.Name);
+			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);
 			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
 		}
 	}
