@@ -25,9 +25,9 @@ namespace RitoAPI.Services
 				var webRequest = WebRequest.Create(url) as HttpWebRequest;
 				webRequest.ContentType = "application/json";
 				webRequest.UserAgent = "Nothing";
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = webRequest.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var sr = new StreamReader(stream))
 					{
 						var championMasteryListJson = sr.ReadToEnd();
 						var championMasteryList = JsonConvert.DeserializeObject<List<ChampionMasteryDTO>>(championMasteryListJson);
@@ -49,9 +49,9 @@ namespace RitoAPI.Services
 				var webRequest = WebRequest.Create(url) as HttpWebRequest;
 				webRequest.ContentType = "application/json";
 				webRequest.UserAgent = "Nothing";
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = webRequest.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var sr = new StreamReader(stream))
 					{
 						var championMasteryJson = sr.ReadToEnd();
 						var championMastery = JsonConvert.DeserializeObject<ChampionMasteryDTO>(championMasteryJson);
@@ -62,6 +62,31 @@ namespace RitoAPI.Services
 			catch (WebException)
 			{
 				return null;
+			}
+		}
+
+		public int GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		{
+			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
+
+			try
+			{
+				var request = WebRequest.Create(url) as HttpWebRequest;
+
+				using (var stream = request.GetResponse().GetResponseStream())
+				{
+					using (var streamReader = new StreamReader(stream))
+					{
+						var championMasteryJson = streamReader.ReadToEnd();
+						var championMastery = JsonConvert.DeserializeObject<int>(championMasteryJson);
+						return championMastery;
+					}
+				}
+			}
+			catch (WebException ex)
+			{
+				var response = ex.Response as HttpWebResponse;
+				throw new InvalidDataException($"The request to riotgames.com has returned with status code " + (int) response.StatusCode);
 			}
 		}
 	}

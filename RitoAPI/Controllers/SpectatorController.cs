@@ -29,9 +29,9 @@ namespace RitoAPI.Controllers
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
-                using (var s = webRequest.GetResponse().GetResponseStream())
+                using (var stream = webRequest.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(s))
+                    using (var sr = new StreamReader(stream))
                     {
                         var gameInfoJson = sr.ReadToEnd();
                         var gameInfo = JsonConvert.DeserializeObject<CurrentGameInfo>(gameInfoJson);
@@ -69,9 +69,9 @@ namespace RitoAPI.Controllers
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
-                using (var s = webRequest.GetResponse().GetResponseStream())
+                using (var stream = webRequest.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(s))
+                    using (var sr = new StreamReader(stream))
                     {
                         var featuredGameInfoJson = sr.ReadToEnd();
                         var featuredGameInfo = JsonConvert.DeserializeObject<FeaturedGames>(featuredGameInfoJson);

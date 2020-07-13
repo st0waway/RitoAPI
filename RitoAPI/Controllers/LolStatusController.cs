@@ -30,9 +30,9 @@ namespace RitoAPI.Controllers
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
-                using (var s = webRequest.GetResponse().GetResponseStream())
+                using (var stream = webRequest.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(s))
+                    using (var sr = new StreamReader(stream))
                     {
                         var shardStatusJson = sr.ReadToEnd();
                         var shardStatus = JsonConvert.DeserializeObject<ShardStatus>(shardStatusJson);

@@ -31,9 +31,9 @@ namespace RitoAPI.Controllers
                 var webRequest = WebRequest.Create(url) as HttpWebRequest;
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
-                using (var s = webRequest.GetResponse().GetResponseStream())
+                using (var stream = webRequest.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(s))
+                    using (var sr = new StreamReader(stream))
                     {
                         var ClashPlayersJson = sr.ReadToEnd();
                         var ClashPlayers = JsonConvert.DeserializeObject<List<ClashPlayerDto>>(ClashPlayersJson);

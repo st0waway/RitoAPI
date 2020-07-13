@@ -21,15 +21,13 @@ namespace RitoAPI.Services
 
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
+				var request = WebRequest.Create(url) as HttpWebRequest;
 
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var summonerAsJson = sr.ReadToEnd();
+						var summonerAsJson = streamReader.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
 						return summoner;
 					}
@@ -46,15 +44,13 @@ namespace RitoAPI.Services
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + accountId + "?api_key=" + _apiKey;
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
+				var request = WebRequest.Create(url) as HttpWebRequest;
 
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var summonerAsJson = sr.ReadToEnd();
+						var summonerAsJson = streamReader.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
 						return summoner;
 					}
@@ -75,9 +71,9 @@ namespace RitoAPI.Services
 				webRequest.ContentType = "application/json";
 				webRequest.UserAgent = "Nothing";
 
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = webRequest.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var sr = new StreamReader(stream))
 					{
 						var summonerAsJson = sr.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
@@ -100,9 +96,9 @@ namespace RitoAPI.Services
 				webRequest.ContentType = "application/json";
 				webRequest.UserAgent = "Nothing";
 
-				using (var s = webRequest.GetResponse().GetResponseStream())
+				using (var stream = webRequest.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(s))
+					using (var sr = new StreamReader(stream))
 					{
 						var summonerAsJson = sr.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
