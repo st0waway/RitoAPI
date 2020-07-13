@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RitoAPI.Models;
 using RitoAPI.Repositories;
+using RitoAPI.Services;
 
 namespace RitoAPI
 {
@@ -39,6 +40,7 @@ namespace RitoAPI
             services.AddSingleton<SpectatorRepo>();
             services.AddSingleton<SummonerRepo>();
             services.AddSingleton<MatchRepo>();
+            services.AddSingleton<SummonerService>();
         }        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,11 +9,11 @@ namespace RitoAPI.Tests
     public class SummonerControllerShould
     {
         private readonly SummonerController _summonerController;
-        IOptions<UserConfig> userConfig = Options.Create(new UserConfig { APIKey = "RGAPI-79838b36-7940-4491-8a08-4c58109c632a" });
+        //IOptions<UserConfig> userConfig = Options.Create(new UserConfig { APIKey = "RGAPI-3442f48a-1573-4bd2-bfbf-442d809728b3" });
 
         public SummonerControllerShould()
         {
-            _summonerController = new SummonerController(userConfig);
+            _summonerController = new SummonerController();
         }
 
         [Fact]
