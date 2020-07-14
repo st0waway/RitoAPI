@@ -32,5 +32,13 @@ namespace RitoAPI.Tests
 			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteries.summonerId);
 			Assert.Equal(1, championMasteries.championId);
 		}
+
+		[Fact]
+		public void GetChampionMasteryScore()
+		{
+			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
+			var championMasteryLevel = service.GetChampionMasteryScore("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
+			Assert.IsType<int>(championMasteryLevel);
+		}
 	}
 }
