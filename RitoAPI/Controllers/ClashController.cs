@@ -28,14 +28,14 @@ namespace RitoAPI.Controllers
             var url = "https://euw1.api.riotgames.com//lol/clash/v1/players/by-summoner/" + summonerId + "?api_key=" + _apiKey;
             try
             {
-                var webRequest = WebRequest.Create(url) as HttpWebRequest;
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Nothing";
-                using (var stream = webRequest.GetResponse().GetResponseStream())
+                var request = WebRequest.Create(url) as HttpWebRequest;
+                request.ContentType = "application/json";
+                request.UserAgent = "Nothing";
+                using (var stream = request.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(stream))
+                    using (var streamReader = new StreamReader(stream))
                     {
-                        var ClashPlayersJson = sr.ReadToEnd();
+                        var ClashPlayersJson = streamReader.ReadToEnd();
                         var ClashPlayers = JsonConvert.DeserializeObject<List<ClashPlayerDto>>(ClashPlayersJson);
                         return ClashPlayers;
                     }

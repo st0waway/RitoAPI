@@ -22,14 +22,14 @@ namespace RitoAPI.Services
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
-				using (var stream = webRequest.GetResponse().GetResponseStream())
+				var request = WebRequest.Create(url) as HttpWebRequest;
+				request.ContentType = "application/json";
+				request.UserAgent = "Nothing";
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(stream))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var championMasteryListJson = sr.ReadToEnd();
+						var championMasteryListJson = streamReader.ReadToEnd();
 						var championMasteryList = JsonConvert.DeserializeObject<List<ChampionMasteryDTO>>(championMasteryListJson);
 						return championMasteryList;
 					}
@@ -46,14 +46,14 @@ namespace RitoAPI.Services
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=" + _apiKey;
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
-				using (var stream = webRequest.GetResponse().GetResponseStream())
+				var request = WebRequest.Create(url) as HttpWebRequest;
+				request.ContentType = "application/json";
+				request.UserAgent = "Nothing";
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(stream))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var championMasteryJson = sr.ReadToEnd();
+						var championMasteryJson = streamReader.ReadToEnd();
 						var championMastery = JsonConvert.DeserializeObject<ChampionMasteryDTO>(championMasteryJson);
 						return championMastery;
 					}

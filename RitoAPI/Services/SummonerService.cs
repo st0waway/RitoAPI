@@ -67,15 +67,15 @@ namespace RitoAPI.Services
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + puuid + "?api_key=" + _apiKey;
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
+				var request = WebRequest.Create(url) as HttpWebRequest;
+				request.ContentType = "application/json";
+				request.UserAgent = "Nothing";
 
-				using (var stream = webRequest.GetResponse().GetResponseStream())
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(stream))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var summonerAsJson = sr.ReadToEnd();
+						var summonerAsJson = streamReader.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
 						return summoner;
 					}
@@ -92,15 +92,15 @@ namespace RitoAPI.Services
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + id + "?api_key=" + _apiKey;
 			try
 			{
-				var webRequest = WebRequest.Create(url) as HttpWebRequest;
-				webRequest.ContentType = "application/json";
-				webRequest.UserAgent = "Nothing";
+				var request = WebRequest.Create(url) as HttpWebRequest;
+				request.ContentType = "application/json";
+				request.UserAgent = "Nothing";
 
-				using (var stream = webRequest.GetResponse().GetResponseStream())
+				using (var stream = request.GetResponse().GetResponseStream())
 				{
-					using (var sr = new StreamReader(stream))
+					using (var streamReader = new StreamReader(stream))
 					{
-						var summonerAsJson = sr.ReadToEnd();
+						var summonerAsJson = streamReader.ReadToEnd();
 						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
 						return summoner;
 					}

@@ -20,14 +20,14 @@ namespace RitoAPI.Services
             var url = "https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations" + "?api_key=" + _apiKey;
             try
             {
-                var webRequest = WebRequest.Create(url) as HttpWebRequest;
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Nothing";
-                using (var stream = webRequest.GetResponse().GetResponseStream())
+                var request = WebRequest.Create(url) as HttpWebRequest;
+                request.ContentType = "application/json";
+                request.UserAgent = "Nothing";
+                using (var stream = request.GetResponse().GetResponseStream())
                 {
-                    using (var sr = new StreamReader(stream))
+                    using (var streamReader = new StreamReader(stream))
                     {
-                        var championInfoJson = sr.ReadToEnd();
+                        var championInfoJson = streamReader.ReadToEnd();
                         var championInfo = JsonConvert.DeserializeObject<ChampionInfo>(championInfoJson);
                         return championInfo;
                     }
