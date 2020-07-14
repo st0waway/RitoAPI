@@ -17,9 +17,9 @@ namespace RitoAPI.Controllers
 		}
 
 		[HttpGet("by-id/{id}")]
-		public IActionResult GetChampionMasteryById(string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		public IActionResult GetChampionsMasteryById(string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
 		{
-			var championMasteries = _championMasteryService.GetChampionMasteryById(id);
+			var championMasteries = _championMasteryService.GetChampionsMasteryById(id);
 
 			if (championMasteries == null)
 			{
@@ -30,9 +30,9 @@ namespace RitoAPI.Controllers
 		}
 
 		[HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
-		public IActionResult GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
+		public IActionResult GetChampionMasteryByIdandChampionId(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
 		{
-			var championMasteries = _championMasteryService.GetChampionMasteryByPlayerIDandChampionID(encryptedSummonerId, championId);
+			var championMasteries = _championMasteryService.GetChampionMasteryByIdandChampionId(encryptedSummonerId, championId);
 
 			if (championMasteries == null)
 			{

@@ -16,7 +16,7 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public List<ChampionMasteryDTO> GetChampionMasteryById(string id)
+		public List<ChampionMasteryDTO> GetChampionsMasteryById(string id)
 		{
 
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + id + "?api_key=" + _apiKey;
@@ -42,7 +42,7 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId)
+		public ChampionMasteryDTO GetChampionMasteryByIdandChampionId(string encryptedSummonerId, long championId)
 		{
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=" + _apiKey;
 
