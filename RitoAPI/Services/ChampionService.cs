@@ -18,6 +18,7 @@ namespace RitoAPI.Services
         public ChampionInfo GetFreeChampionInfo()
         {
             var url = "https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations" + "?api_key=" + _apiKey;
+
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;

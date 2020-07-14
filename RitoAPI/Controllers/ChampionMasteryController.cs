@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using RitoAPI.Models;
-using RitoAPI.Repositories;
 using RitoAPI.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
 
 namespace RitoAPI.Controllers
 {

@@ -42,6 +42,7 @@ namespace RitoAPI.Services
 		public SummonerDTO GetSummonerByAccount(string accountId)
 		{
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + accountId + "?api_key=" + _apiKey;
+
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;
@@ -65,6 +66,7 @@ namespace RitoAPI.Services
 		public SummonerDTO GetSummonerByPUUID(string puuid)
 		{
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + puuid + "?api_key=" + _apiKey;
+
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;
@@ -90,6 +92,7 @@ namespace RitoAPI.Services
 		public SummonerDTO GetSummonerBySummonerID(string id)
 		{
 			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + id + "?api_key=" + _apiKey;
+
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;

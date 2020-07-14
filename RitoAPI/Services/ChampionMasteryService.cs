@@ -20,6 +20,7 @@ namespace RitoAPI.Services
 		{
 
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
+
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;
@@ -44,6 +45,7 @@ namespace RitoAPI.Services
 		public ChampionMasteryDTO GetChampionMasteryByPlayerIDandChampionID(string encryptedSummonerId, long championId)
 		{
 			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=" + _apiKey;
+
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;
