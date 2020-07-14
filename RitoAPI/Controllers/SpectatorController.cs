@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RitoAPI.Models;
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers

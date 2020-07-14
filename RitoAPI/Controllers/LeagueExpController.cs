@@ -17,7 +17,7 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("{queue}/{tier}/{division}")]
-        public ActionResult<List<LeagueEntryDTO>> GetLeagueExp(string queue = "RANKED_SOLO_5x5", string tier = "GOLD", string division = "IV")
+        public IActionResult GetLeagueExp(string queue = "RANKED_SOLO_5x5", string tier = "GOLD", string division = "IV")
         {
             var championMasteries = _leagueExpService.GetLeagueExp(queue, tier, division);
 
