@@ -17,8 +17,15 @@ namespace RitoAPI.Tests
 		[Fact]
 		public void GetGameInfo()
 		{
-			//var service = (SpectatorService)_factory.Services.GetService(typeof(SpectatorService));
-			//var summoner = service.GetGameInfo();			
+			var service = (SpectatorService)_factory.Services.GetService(typeof(SpectatorService));
+			var summonerService = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
+			var featuredGames = service.GetFeaturedGames();
+			var activeSummonerName = featuredGames.gameList[0].participants[0].summonerName;
+			var summoner = summonerService.GetSummonerByName(activeSummonerName);
+			var summonerId = summoner.Id;
+			var gameInfo = service.GetGameInfo(summonerId);
+			Assert.IsType<CurrentGameInfo>(gameInfo);
+			Assert.Equal(featuredGames.gameList[0].gameId, gameInfo.gameId);
 		}
 
 		[Fact]
