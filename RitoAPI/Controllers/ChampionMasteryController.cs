@@ -16,10 +16,10 @@ namespace RitoAPI.Controllers
 			_championMasteryService = championMasteryService;
 		}
 
-		[HttpGet("by-summoner/{encryptedSummonerId}")]
-		public IActionResult GetChamcpionMasteryBySummoner(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		[HttpGet("by-id/{id}")]
+		public IActionResult GetChampionMasteryById(string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
 		{
-			var championMasteries = _championMasteryService.GetChamcpionMasteryBySummoner(encryptedSummonerId);
+			var championMasteries = _championMasteryService.GetChampionMasteryById(id);
 
 			if (championMasteries == null)
 			{

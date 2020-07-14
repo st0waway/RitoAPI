@@ -16,10 +16,10 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public List<ChampionMasteryDTO> GetChamcpionMasteryBySummoner(string encryptedSummonerId)
+		public List<ChampionMasteryDTO> GetChampionMasteryById(string id)
 		{
 
-			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
+			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + id + "?api_key=" + _apiKey;
 
 			try
 			{
