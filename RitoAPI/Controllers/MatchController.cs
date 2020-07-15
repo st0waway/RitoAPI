@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using RitoAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -19,9 +15,9 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("/by-accountId/{id}")]
-        public ActionResult<MatchlistDto> GetMatchlistByAccount(string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
+        public IActionResult GetMatchlistByAccountId(string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
-            var summoner = _matchService.GetMatchlistByAccount(id);
+            var summoner = _matchService.GetMatchlistByAccountId(id);
 
             if (summoner == null)
             {
@@ -32,44 +28,16 @@ namespace RitoAPI.Controllers
         }
 
         [HttpGet("/by-matchid/{matchid}")]
-        public ActionResult<MatchDto> GetMatchById(string matchid = "4688093085")
+        public IActionResult GetMatchByMatchId(string matchid = "4688093085")
         {
-            var url = "https://euw1.api.riotgames.com/lol/match/v4/matches/" + matchid + "?api_key=";
-            try
+            var summoner = _matchService.GetMatchByMatchId(matchid);
+
+            if (summoner == null)
             {
-                var request = WebRequest.Create(url) as HttpWebRequest;
-                request.ContentType = "application/json";
-                request.UserAgent = "Nothing";
-                using (var stream = request.GetResponse().GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        var matchJson = streamReader.ReadToEnd();
-                        var match = JsonConvert.DeserializeObject<MatchDto>(matchJson);
-                        return match;
-                    }
-                }
+                return BadRequest();
             }
-            catch (WebException e)
-            {
-                if (e.Status == WebExceptionStatus.ProtocolError)
-                {
-                    var response = e.Response as HttpWebResponse;
-                    if (response != null)
-                    {
-                        var code = (int)response.StatusCode;
-                        return StatusCode(code);
-                    }
-                    else
-                    {
-                        return StatusCode(500);
-                    }
-                }
-                else
-                {
-                    return StatusCode(500);
-                }
-            }
+
+            return Ok(summoner);
         }
     }
 }

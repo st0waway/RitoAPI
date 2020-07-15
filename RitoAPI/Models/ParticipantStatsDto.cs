@@ -42,7 +42,7 @@
         public int visionWardsBoughtInGame { get; set; }
         public int objectivePlayerScore { get; set; }
         public int kills { get; set; }
-        public int firstTowerAssist { get; set; }
+        public bool firstTowerAssist { get; set; }
         public int combatPlayerScore { get; set; }
         public int inhibitorKills { get; set; }
         public int turretKills { get; set; }
