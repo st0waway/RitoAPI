@@ -17,27 +17,27 @@ namespace RitoAPI.Controllers
         [HttpGet("/by-accountId/{id}")]
         public IActionResult GetMatchlistByAccountId(string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
-            var summoner = _matchService.GetMatchlistByAccountId(id);
+            var matchList = _matchService.GetMatchlistByAccountId(id);
 
-            if (summoner == null)
+            if (matchList == null)
             {
                 return BadRequest();
             }
 
-            return Ok(summoner);
+            return Ok(matchList);
         }
 
         [HttpGet("/by-matchid/{matchid}")]
         public IActionResult GetMatchByMatchId(string matchid = "4688093085")
         {
-            var summoner = _matchService.GetMatchByMatchId(matchid);
+            var match = _matchService.GetMatchByMatchId(matchid);
 
-            if (summoner == null)
+            if (match == null)
             {
                 return BadRequest();
             }
 
-            return Ok(summoner);
+            return Ok(match);
         }
     }
 }

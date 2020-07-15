@@ -16,27 +16,27 @@ namespace RitoAPI.Controllers
         [HttpGet("spectate/{id}")]
         public IActionResult GetGameInfo(string id = "fYjvBkqrZjvJ54r6tpH0wY2-CoNQFc5lIW92E-nFnUClTPE")
         {
-            var summoner = _spectatorService.GetGameInfo(id);
+            var gameInfo = _spectatorService.GetGameInfo(id);
 
-            if (summoner == null)
+            if (gameInfo == null)
             {
                 return BadRequest();
             }
 
-            return Ok(summoner);
+            return Ok(gameInfo);
         }
 
         [HttpGet("featured-games")]
         public IActionResult GetFeaturedGames()
         {
-            var summoner = _spectatorService.GetFeaturedGames();
+            var featuredGamesInfo = _spectatorService.GetFeaturedGames();
 
-            if (summoner == null)
+            if (featuredGamesInfo == null)
             {
                 return BadRequest();
             }
 
-            return Ok(summoner);
+            return Ok(featuredGamesInfo);
         }
     }
 }

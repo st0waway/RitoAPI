@@ -32,14 +32,14 @@ namespace RitoAPI.Controllers
 		[HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
 		public IActionResult GetChampionMasteryByIdandChampionId(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
 		{
-			var championMasteries = _championMasteryService.GetChampionMasteryByIdandChampionId(encryptedSummonerId, championId);
+			var championMastery = _championMasteryService.GetChampionMasteryByIdandChampionId(encryptedSummonerId, championId);
 
-			if (championMasteries == null)
+			if (championMastery == null)
 			{
 				return BadRequest();
 			}
 
-			return Ok(championMasteries);
+			return Ok(championMastery);
 		}
 
 		[HttpGet("scores/{encryptedSummonerId}")]
@@ -47,8 +47,8 @@ namespace RitoAPI.Controllers
 		{
 			try
 			{
-				var championMasteries = _championMasteryService.GetChampionMasteryScore(encryptedSummonerId);
-				return Ok(championMasteries);
+				var championMasteryScore = _championMasteryService.GetChampionMasteryScore(encryptedSummonerId);
+				return Ok(championMasteryScore);
 			}
 			catch (InvalidDataException ex)
 			{

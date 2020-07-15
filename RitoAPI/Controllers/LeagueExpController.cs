@@ -17,14 +17,14 @@ namespace RitoAPI.Controllers
         [HttpGet("{queue}/{tier}/{division}")]
         public IActionResult GetLeagueExp(string queue = "RANKED_SOLO_5x5", string tier = "GOLD", string division = "IV")
         {
-            var championMasteries = _leagueExpService.GetLeagueExp(queue, tier, division);
+            var leagueInfo = _leagueExpService.GetLeagueExp(queue, tier, division);
 
-            if (championMasteries == null)
+            if (leagueInfo == null)
             {
                 return BadRequest();
             }
 
-            return Ok(championMasteries);
+            return Ok(leagueInfo);
         }
     }
 }
