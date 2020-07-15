@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using RitoAPI.Models;
-using RitoAPI.Repositories;
+using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
 {
@@ -13,54 +9,24 @@ namespace RitoAPI.Controllers
     [ApiController]
     public class ClashController : ControllerBase
     {
-        private readonly ClashRepo _repository;
-        private readonly string _apiKey;
+        private ClashService _clashService;
 
-        public ClashController(IOptions<UserConfig> userConfigAccessor, ClashRepo clashv1Repo)
+        public ClashController(ClashService clashService)
         {
-            _apiKey = userConfigAccessor.Value.APIKey;
-            _repository = clashv1Repo;
-        }       
+            _clashService = clashService;
+        }
 
         [HttpGet("bySummoner/{summonerId}")]
         public ActionResult<List<ClashPlayerDto>> GetActiveClashPlayers(string summonerId = "")
         {
-            var url = "https://euw1.api.riotgames.com//lol/clash/v1/players/by-summoner/" + summonerId + "?api_key=" + _apiKey;
-            try
+            var clashPlayers = _clashService.GetActiveClashPlayers(summonerId);
+
+            if (clashPlayers == null)
             {
-                var request = WebRequest.Create(url) as HttpWebRequest;
-                request.ContentType = "application/json";
-                request.UserAgent = "Nothing";
-                using (var stream = request.GetResponse().GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        var ClashPlayersJson = streamReader.ReadToEnd();
-                        var ClashPlayers = JsonConvert.DeserializeObject<List<ClashPlayerDto>>(ClashPlayersJson);
-                        return ClashPlayers;
-                    }
-                }
+                return BadRequest();
             }
-            catch (WebException e)
-            {
-                if (e.Status == WebExceptionStatus.ProtocolError)
-                {
-                    var response = e.Response as HttpWebResponse;
-                    if (response != null)
-                    {
-                        var code = (int)response.StatusCode;
-                        return StatusCode(code);
-                    }
-                    else
-                    {
-                        return StatusCode(500);
-                    }
-                }
-                else
-                {
-                    return StatusCode(500);
-                }
-            }
+
+            return Ok(clashPlayers);
         }
     }
 }
