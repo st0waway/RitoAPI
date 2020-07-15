@@ -45,6 +45,7 @@ namespace RitoAPI
 			services.AddSingleton<ChampionMasteryService>();
 			services.AddSingleton<LeagueExpService>();
 			services.AddSingleton<SpectatorService>();
+			services.AddSingleton<MatchService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
