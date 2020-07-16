@@ -47,6 +47,7 @@ namespace RitoAPI
 			services.AddSingleton<SpectatorService>();
 			services.AddSingleton<MatchService>();
 			services.AddSingleton<LolRankedService>();
+			services.AddSingleton<LolStatusService>();
 			services.AddSingleton<ClashService>();
 		}
 
