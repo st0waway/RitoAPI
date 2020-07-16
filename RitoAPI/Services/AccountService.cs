@@ -38,5 +38,29 @@ namespace RitoAPI.Services
 				return null;
 			}
 		}
+
+		public AccountDto GetAccountByRiotId(string region, string gameName, string tagLine)
+		{
+			var url = "https://" + region + ".api.riotgames.com/riot/account/v1/accounts/by-riot-id/"+ gameName + "/" + tagLine + "?api_key=" + _apiKey;
+
+			try
+			{
+				var request = WebRequest.Create(url) as HttpWebRequest;
+
+				using (var stream = request.GetResponse().GetResponseStream())
+				{
+					using (var streamReader = new StreamReader(stream))
+					{
+						var accountAsJson = streamReader.ReadToEnd();
+						var account = JsonConvert.DeserializeObject<AccountDto>(accountAsJson);
+						return account;
+					}
+				}
+			}
+			catch (WebException)
+			{
+				return null;
+			}
+		}		
 	}
 }

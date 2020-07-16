@@ -26,5 +26,18 @@ namespace RitoAPI.Controllers
 
 			return Ok(summoner);
 		}
+
+		[HttpGet("riotid/{gameName}/{tagLine}")]
+		public IActionResult GetAccountByRiotId(string region = "europe", string gameName = "Lum1x", string tagLine = "EUW")
+		{
+			var summoner = _accountService.GetAccountByRiotId(region, gameName, tagLine);
+
+			if (summoner == null)
+			{
+				return BadRequest();
+			}
+
+			return Ok(summoner);
+		}
 	}
 }
