@@ -19,11 +19,20 @@ namespace RitoAPI.Tests
 		public void GetMatchlistByAccountId()
 		{
 			var service = (MatchService)_factory.Services.GetService(typeof(MatchService));
-			var featuredGames = service.GetMatchlistByAccountId("55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI");
-			Assert.IsType<MatchlistDto>(featuredGames);
-			Assert.Equal(100, featuredGames.matches.Count);
-			var topGames = featuredGames.matches.Where(x => x.lane == "TOP");
+			var gamesOnAccount = service.GetMatchlistByAccountId("55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI");
+			Assert.IsType<MatchlistDto>(gamesOnAccount);
+			Assert.Equal(100, gamesOnAccount.matches.Count);
+			var topGames = gamesOnAccount.matches.Where(x => x.lane == "TOP");
 			Assert.NotEmpty(topGames);
+		}
+
+		[Fact]
+		public void GetMatchByMatchId()
+		{
+			var service = (MatchService)_factory.Services.GetService(typeof(MatchService));
+			var gamesOnAccount = service.GetMatchlistByAccountId("55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI");
+			var match = service.GetMatchByMatchId(gamesOnAccount.matches[0].gameId.ToString());
+			Assert.IsType<MatchDto>(match);
 		}
 	}
 }
