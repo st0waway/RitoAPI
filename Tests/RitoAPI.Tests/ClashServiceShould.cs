@@ -19,8 +19,9 @@ namespace RitoAPI.Tests
 		public void GetActiveClashPlayers()
 		{
 			var service = (ClashService)_factory.Services.GetService(typeof(ClashService));
-			var summoner = service.GetActiveClashPlayers("");
+			var summoner = service.GetActiveClashPlayers("hww71nGe9ugELSlk19keIQtTCsjb5GkkWfTjzw66l1g8opQ"); //need an active clash summoner id
 			Assert.IsType<List<ClashPlayerDto>>(summoner);
+			Assert.NotEmpty(summoner);
 		}
 	}
 }
