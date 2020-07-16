@@ -49,6 +49,7 @@ namespace RitoAPI
 			services.AddSingleton<LolRankedService>();
 			services.AddSingleton<LolStatusService>();
 			services.AddSingleton<ClashService>();
+			services.AddSingleton<AccountService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
