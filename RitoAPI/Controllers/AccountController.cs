@@ -39,5 +39,18 @@ namespace RitoAPI.Controllers
 
 			return Ok(summoner);
 		}
+
+		[HttpGet("active-shards/by-game/{game}/by-puuid/{puuid}")]
+		public IActionResult GetActiveShardForPlayer(string region = "europe", string game = "val", string puuid = "6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA")
+		{
+			var summoner = _accountService.GetActiveShardForPlayer(region, game, puuid);
+
+			if (summoner == null)
+			{
+				return BadRequest();
+			}
+
+			return Ok(summoner);
+		}
 	}
 }
