@@ -17,7 +17,7 @@ namespace RitoAPI.Tests
 		public void GetChampionsMasteryById()
 		{
 			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
-			var championMasteryList = service.GetChampionsMasteryById("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
+			var championMasteryList = service.GetChampionsMasteryById("euw1" ,"ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
 			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[0].summonerId);
 			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[5].summonerId);
 			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[10].summonerId);
@@ -28,7 +28,7 @@ namespace RitoAPI.Tests
 		public void GetChampionMasteryByIdandChampionId()
 		{
 			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
-			var championMasteries = service.GetChampionMasteryByIdandChampionId("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", 1);
+			var championMasteries = service.GetChampionMasteryByIdandChampionId("euw1", "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", 1);
 			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteries.summonerId);
 			Assert.Equal(1, championMasteries.championId);
 		}
@@ -37,7 +37,7 @@ namespace RitoAPI.Tests
 		public void GetChampionMasteryScore()
 		{
 			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
-			var championMasteryLevel = service.GetChampionMasteryScore("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
+			var championMasteryLevel = service.GetChampionMasteryScore("euw1", "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
 			Assert.IsType<int>(championMasteryLevel);
 		}
 	}

@@ -18,7 +18,7 @@ namespace RitoAPI.Tests
 		public void GetFreeChampionInfo()
 		{
 			var service = (ChampionService)_factory.Services.GetService(typeof(ChampionService));
-			var freeChampionRotation = service.GetFreeChampionInfo();
+			var freeChampionRotation = service.GetFreeChampionInfo("euw1");
 			Assert.IsType<ChampionInfo>(freeChampionRotation);
 			Assert.Equal(15, freeChampionRotation.freeChampionIds.Count);
 			Assert.Equal(10, freeChampionRotation.freeChampionIdsForNewPlayers.Count);

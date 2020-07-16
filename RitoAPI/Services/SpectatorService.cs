@@ -15,9 +15,9 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public CurrentGameInfo GetGameInfo(string id)
+		public CurrentGameInfo GetGameInfo(string region, string id)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + id + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/{id}?api_key={_apiKey}";
 
 			try
 			{
@@ -40,9 +40,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public FeaturedGames GetFeaturedGames()
+		public FeaturedGames GetFeaturedGames(string region)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/spectator/v4/featured-games" + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/spectator/v4/featured-games?api_key={_apiKey}";
 
 			try
 			{

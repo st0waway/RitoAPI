@@ -19,7 +19,7 @@ namespace RitoAPI.Tests
 		public void GetLeagueExp()
 		{
 			var service = (LeagueExpService)_factory.Services.GetService(typeof(LeagueExpService));
-			var leagueQueueEntry = service.GetLeagueExp("RANKED_SOLO_5x5", "PLATINUM", "IV");
+			var leagueQueueEntry = service.GetLeagueExp("euw1","RANKED_SOLO_5x5", "PLATINUM", "IV");
 			Assert.IsType<List<LeagueEntryDTO>>(leagueQueueEntry);
 			Assert.Equal("PLATINUM", leagueQueueEntry[0].tier);
 			Assert.Equal("PLATINUM", leagueQueueEntry[5].tier);

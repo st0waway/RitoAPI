@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,8 @@ namespace RitoAPI
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+				//Resolve conflicting paths.
+				//c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 			});
 
 			var userConfig = _configuration.GetSection("UserConfig");
@@ -59,6 +62,8 @@ namespace RitoAPI
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseDeveloperExceptionPage();
 
 			// Enable middleware to serve generated Swagger as a JSON endpoint.
 			app.UseSwagger();

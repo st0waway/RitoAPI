@@ -16,10 +16,10 @@ namespace RitoAPI.Controllers
             _clashService = clashService;
         }
 
-        [HttpGet("bySummoner/{summonerId}")]
-        public ActionResult<List<ClashPlayerDto>> GetActiveClashPlayers(string summonerId = "")
+        [HttpGet("bySummoner/{summonerId}/{region}")]
+        public ActionResult<List<ClashPlayerDto>> GetActiveClashPlayers(string region, string summonerId = "")
         {
-            var clashPlayers = _clashService.GetActiveClashPlayers(summonerId);
+            var clashPlayers = _clashService.GetActiveClashPlayers(region, summonerId);
 
             if (clashPlayers == null)
             {

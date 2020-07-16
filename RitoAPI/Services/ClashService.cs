@@ -16,10 +16,11 @@ namespace RitoAPI.Services
             _apiKey = userConfigAccessor.Value.APIKey;
         }
 
-        public List<ClashPlayerDto> GetActiveClashPlayers(string summonerId = "")
+        public List<ClashPlayerDto> GetActiveClashPlayers(string region, string summonerId = "")
         {
-            var url = "https://euw1.api.riotgames.com//lol/clash/v1/players/by-summoner/" + summonerId + "?api_key=" + _apiKey;
-            try
+            var url = $"https://{region}.api.riotgames.com//lol/clash/v1/players/by-summoner/{summonerId}?api_key={_apiKey}";
+
+			try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;
                 request.ContentType = "application/json";

@@ -13,10 +13,10 @@ namespace RitoAPI.Controllers
             _spectatorService = spectatorService;
         }
 
-        [HttpGet("spectate/{id}")]
-        public IActionResult GetGameInfo(string id = "fYjvBkqrZjvJ54r6tpH0wY2-CoNQFc5lIW92E-nFnUClTPE")
+        [HttpGet("spectate/{id}/{region}")]
+        public IActionResult GetGameInfo(string region = "euw1",string id = "fYjvBkqrZjvJ54r6tpH0wY2-CoNQFc5lIW92E-nFnUClTPE")
         {
-            var gameInfo = _spectatorService.GetGameInfo(id);
+            var gameInfo = _spectatorService.GetGameInfo(region, id);
 
             if (gameInfo == null)
             {
@@ -26,10 +26,10 @@ namespace RitoAPI.Controllers
             return Ok(gameInfo);
         }
 
-        [HttpGet("featured-games")]
-        public IActionResult GetFeaturedGames()
+        [HttpGet("featured-games/{region}")]
+        public IActionResult GetFeaturedGames(string region = "euw1")
         {
-            var featuredGamesInfo = _spectatorService.GetFeaturedGames();
+            var featuredGamesInfo = _spectatorService.GetFeaturedGames(region);
 
             if (featuredGamesInfo == null)
             {

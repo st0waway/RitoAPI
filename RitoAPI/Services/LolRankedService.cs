@@ -17,7 +17,7 @@ namespace RitoAPI.Services
 
 		public LeaderboardDto GetPlayersInMasterTier(string region)
         {
-            var url = "https://" + region + ".api.riotgames.com/lor/ranked/v1/leaderboards" + "?api_key=" + _apiKey;
+            var url = $"https://{region}.api.riotgames.com/lor/ranked/v1/leaderboards?api_key={_apiKey}";
 
             try
             {

@@ -14,10 +14,10 @@ namespace RitoAPI.Controllers
             _matchService = matchService;
         }
 
-        [HttpGet("/by-accountId/{id}")]
-        public IActionResult GetMatchlistByAccountId(string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
+        [HttpGet("/by-accountId/{id}/{region}")]
+        public IActionResult GetMatchlistByAccountId(string region = "euw1", string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
-            var matchList = _matchService.GetMatchlistByAccountId(id);
+            var matchList = _matchService.GetMatchlistByAccountId(region, id);
 
             if (matchList == null)
             {
@@ -27,10 +27,10 @@ namespace RitoAPI.Controllers
             return Ok(matchList);
         }
 
-        [HttpGet("/by-matchid/{matchid}")]
-        public IActionResult GetMatchByMatchId(string matchid = "4688093085")
+        [HttpGet("/by-matchid/{matchid}/{region}")]
+        public IActionResult GetMatchByMatchId(string region= "euw1", string matchid = "4688093085")
         {
-            var match = _matchService.GetMatchByMatchId(matchid);
+            var match = _matchService.GetMatchByMatchId(region, matchid);
 
             if (match == null)
             {

@@ -14,7 +14,7 @@ namespace RitoAPI.Controllers
             _lolRankedService = lolRankedService;
         }
 
-        [HttpGet]
+        [HttpGet("/by-region/{region}")]
         public IActionResult GetPlayersInMasterTier(string region = "europe")
         {
             var playersInMasterTier = _lolRankedService.GetPlayersInMasterTier(region);

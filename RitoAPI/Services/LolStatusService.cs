@@ -15,9 +15,10 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public ShardStatus GetLeagueStatus(string server)
+		public ShardStatus GetLeagueStatus(string region)
         {
-            var url = "https://" + server + ".api.riotgames.com/lol/status/v3/shard-data" + "?api_key=" + _apiKey;
+            var url = $"https://{region}.api.riotgames.com/lol/status/v3/shard-data?api_key={ _apiKey}";
+
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;

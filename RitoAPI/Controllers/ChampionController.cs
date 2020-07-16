@@ -13,11 +13,11 @@ namespace RitoAPI.Controllers
             _championService = championService;
         }
 
-        [HttpGet("champion-rotations")]
-        public IActionResult GetFreeChampionInfo()
+        [HttpGet("champion-rotations/{region}")]
+        public IActionResult GetFreeChampionInfo(string region = "euw1")
         {
             {
-                var freeChampRotation = _championService.GetFreeChampionInfo();
+                var freeChampRotation = _championService.GetFreeChampionInfo(region);
 
                 if (freeChampRotation == null)
                 {

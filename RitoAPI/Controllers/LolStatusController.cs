@@ -14,10 +14,10 @@ namespace RitoAPI.Controllers
             _lolStatusService = lolStatusService;
         }
 
-        [HttpGet]
-        public IActionResult GetLeagueStatus(string server = "EUW1")
+        [HttpGet("/{region}")]
+        public IActionResult GetLeagueStatus(string region = "EUW1")
         {
-            var shardStatus = _lolStatusService.GetLeagueStatus(server);
+            var shardStatus = _lolStatusService.GetLeagueStatus(region);
 
             if (shardStatus == null)
             {

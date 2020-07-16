@@ -16,9 +16,9 @@ namespace RitoAPI.Services
             _apiKey = userConfigAccessor.Value.APIKey;
         }
 
-        public List<LeagueEntryDTO> GetLeagueExp(string queue, string tier, string division)
+        public List<LeagueEntryDTO> GetLeagueExp(string region, string queue, string tier, string division)
         {
-            var url = "https://euw1.api.riotgames.com/lol/league-exp/v4/entries/" + queue + "/" + tier + "/" + division + "?api_key=" + _apiKey;
+            var url = $"https://{region}.api.riotgames.com/lol/league-exp/v4/entries/{queue}/{tier}/{division}?api_key={_apiKey}";
 
             try
             {

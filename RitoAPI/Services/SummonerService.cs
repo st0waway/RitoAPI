@@ -15,9 +15,9 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public SummonerDTO GetSummonerByName(string name)
+		public SummonerDTO GetSummonerByName(string region, string name)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + name + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}?api_key={_apiKey}";
 
 			try
 			{
@@ -39,9 +39,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public SummonerDTO GetSummonerByAccount(string accountId)
+		public SummonerDTO GetSummonerByAccount(string region, string accountId)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-account/" + accountId + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-account/{accountId}?api_key={_apiKey}";
 
 			try
 			{
@@ -63,9 +63,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public SummonerDTO GetSummonerByPUUID(string puuid)
+		public SummonerDTO GetSummonerByPUUID(string region, string puuid)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + puuid + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}?api_key={_apiKey}";
 
 			try
 			{
@@ -89,9 +89,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public SummonerDTO GetSummonerBySummonerID(string id)
+		public SummonerDTO GetSummonerBySummonerID(string region, string id)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/" + id + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{id}?api_key={_apiKey}";
 
 			try
 			{

@@ -15,9 +15,9 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-        public ChampionInfo GetFreeChampionInfo()
+        public ChampionInfo GetFreeChampionInfo(string region)
         {
-            var url = "https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations" + "?api_key=" + _apiKey;
+            var url = $"https://{region}.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={_apiKey}";
 
             try
             {

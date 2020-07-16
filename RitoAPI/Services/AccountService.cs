@@ -17,7 +17,7 @@ namespace RitoAPI.Services
 
 		public AccountDto GetAccountByPuuid(string region, string puuid)
 		{
-			var url = "https://" + region + ".api.riotgames.com/riot/account/v1/accounts/by-puuid/" + puuid + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/riot/account/v1/accounts/by-puuid/{puuid}?api_key={_apiKey}";
 
 			try
 			{
@@ -41,7 +41,7 @@ namespace RitoAPI.Services
 
 		public AccountDto GetAccountByRiotId(string region, string gameName, string tagLine)
 		{
-			var url = "https://" + region + ".api.riotgames.com/riot/account/v1/accounts/by-riot-id/"+ gameName + "/" + tagLine + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}?api_key={_apiKey}";
 
 			try
 			{
@@ -65,7 +65,7 @@ namespace RitoAPI.Services
 
 		public ActiveShardDto GetActiveShardForPlayer(string region, string game, string puuid)
 		{
-			var url = "https://" + region + ".api.riotgames.com/riot/account/v1/active-shards/by-game/" + game + "/by-puuid/" + puuid + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/riot/account/v1/active-shards/by-game/{game}/by-puuid/{puuid}?api_key={_apiKey}";
 			
 			try
 			{

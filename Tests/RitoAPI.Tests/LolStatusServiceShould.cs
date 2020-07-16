@@ -18,7 +18,7 @@ namespace RitoAPI.Tests
 		public void GetLeagueStatus()
 		{
 			var service = (LolStatusService)_factory.Services.GetService(typeof(LolStatusService));
-			var shardStatus = service.GetLeagueStatus("EUW1");
+			var shardStatus = service.GetLeagueStatus("euw1");
 			Assert.IsType<ShardStatus>(shardStatus);
 			Assert.Equal("prod.euw1.lol.riotgames.com", shardStatus.hostname);
 			Assert.Equal("EU West", shardStatus.name);

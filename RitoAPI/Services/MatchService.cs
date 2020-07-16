@@ -15,9 +15,9 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public MatchlistDto GetMatchlistByAccountId(string id)
+		public MatchlistDto GetMatchlistByAccountId(string region, string id)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + id + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{id}?api_key={_apiKey}";
 
 			try
 			{
@@ -40,9 +40,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public MatchDto GetMatchByMatchId(string matchid)
+		public MatchDto GetMatchByMatchId(string region, string matchid)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/match/v4/matches/" + matchid + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/match/v4/matches/{matchid}?api_key={_apiKey}";
 
 			try
 			{

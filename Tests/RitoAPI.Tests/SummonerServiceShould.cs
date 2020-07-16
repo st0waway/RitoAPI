@@ -18,7 +18,7 @@ namespace RitoAPI.Tests
 		public void GetSummonerByName()
 		{
 			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var summoner = service.GetSummonerByName("LumiX");
+			var summoner = service.GetSummonerByName("euw1", "LumiX");
 			Assert.IsType<SummonerDTO>(summoner);			
 			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);
 			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
@@ -29,7 +29,7 @@ namespace RitoAPI.Tests
 		public void GetSummonerByAccount()
 		{
 			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var summoner = service.GetSummonerByAccount("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw");
+			var summoner = service.GetSummonerByAccount("euw1", "KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw");
 			Assert.IsType<SummonerDTO>(summoner);
 			Assert.Equal("LumiX", summoner.Name);
 			Assert.Equal("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg", summoner.Id);
@@ -40,7 +40,7 @@ namespace RitoAPI.Tests
 		public void GetSummonerByPUUID()
 		{
 			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var summoner = service.GetSummonerByPUUID("uTkDriAmEwNbyev-RAdu8mppfJyrVhL393CvxYp6OMt0IyL4OzeYHVN9nbQMtpPhcIKmpJSfRjuDJg");
+			var summoner = service.GetSummonerByPUUID("euw1", "uTkDriAmEwNbyev-RAdu8mppfJyrVhL393CvxYp6OMt0IyL4OzeYHVN9nbQMtpPhcIKmpJSfRjuDJg");
 			Assert.IsType<SummonerDTO>(summoner);
 			Assert.Equal("LumiX", summoner.Name);
 			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);
@@ -51,7 +51,7 @@ namespace RitoAPI.Tests
 		public void GetSummonerBySummonerID()
 		{
 			var service = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var summoner = service.GetSummonerBySummonerID("xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg");
+			var summoner = service.GetSummonerBySummonerID("euw1", "xgyV-Wuddie5sg_XjTSOPWMM64CVIegtl-8jRpLCQZnYkSg");
 			Assert.IsType<SummonerDTO>(summoner);
 			Assert.Equal("LumiX", summoner.Name);
 			Assert.Equal("KfujoSa2slNW8QP8ne6AkZb5PNtGK8aSxX80LPJQ6CyOMw", summoner.AccountId);

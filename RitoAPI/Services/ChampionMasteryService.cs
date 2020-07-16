@@ -16,10 +16,10 @@ namespace RitoAPI.Services
 			_apiKey = userConfigAccessor.Value.APIKey;
 		}
 
-		public List<ChampionMasteryDTO> GetChampionsMasteryById(string id)
+		public List<ChampionMasteryDTO> GetChampionsMasteryById(string region, string id)
 		{
 
-			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + id + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{id}?api_key={_apiKey}";
 
 			try
 			{
@@ -42,9 +42,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public ChampionMasteryDTO GetChampionMasteryByIdandChampionId(string encryptedSummonerId, long championId)
+		public ChampionMasteryDTO GetChampionMasteryByIdandChampionId(string region, string encryptedSummonerId, long championId)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" + encryptedSummonerId + "/by-champion/" + championId + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}?api_key={_apiKey}";
 
 			try
 			{
@@ -67,9 +67,9 @@ namespace RitoAPI.Services
 			}
 		}
 
-		public int GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		public int GetChampionMasteryScore(string region ,string encryptedSummonerId)
 		{
-			var url = "https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" + encryptedSummonerId + "?api_key=" + _apiKey;
+			var url = $"https://{region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}?api_key={_apiKey}";
 
 			try
 			{

@@ -16,10 +16,10 @@ namespace RitoAPI.Controllers
 			_championMasteryService = championMasteryService;
 		}
 
-		[HttpGet("by-id/{id}")]
-		public IActionResult GetChampionsMasteryById(string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		[HttpGet("by-id/{id}/{region}")]
+		public IActionResult GetChampionsMasteryById(string region = "euw1", string id = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
 		{
-			var championMasteries = _championMasteryService.GetChampionsMasteryById(id);
+			var championMasteries = _championMasteryService.GetChampionsMasteryById(region, id);
 
 			if (championMasteries == null)
 			{
@@ -29,10 +29,10 @@ namespace RitoAPI.Controllers
 			return Ok(championMasteries);
 		}
 
-		[HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}")]
-		public IActionResult GetChampionMasteryByIdandChampionId(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
+		[HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}/{region}")]
+		public IActionResult GetChampionMasteryByIdandChampionId(string region = "euw1", string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
 		{
-			var championMastery = _championMasteryService.GetChampionMasteryByIdandChampionId(encryptedSummonerId, championId);
+			var championMastery = _championMasteryService.GetChampionMasteryByIdandChampionId(region, encryptedSummonerId, championId);
 
 			if (championMastery == null)
 			{
@@ -42,12 +42,12 @@ namespace RitoAPI.Controllers
 			return Ok(championMastery);
 		}
 
-		[HttpGet("scores/{encryptedSummonerId}")]
-		public IActionResult GetChampionMasteryScore(string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
+		[HttpGet("scores/{encryptedSummonerId}/{region}")]
+		public IActionResult GetChampionMasteryScore(string region = "euw1", string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")
 		{
 			try
 			{
-				var championMasteryScore = _championMasteryService.GetChampionMasteryScore(encryptedSummonerId);
+				var championMasteryScore = _championMasteryService.GetChampionMasteryScore(region, encryptedSummonerId);
 				return Ok(championMasteryScore);
 			}
 			catch (InvalidDataException ex)
