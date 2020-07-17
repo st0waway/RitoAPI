@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,6 +52,7 @@ namespace RitoAPI
 			services.AddSingleton<LolStatusService>();
 			services.AddSingleton<ClashService>();
 			services.AddSingleton<AccountService>();
+			services.AddSingleton<LastMatchesService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
