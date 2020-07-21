@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RitoAPI.Services;
+using Microsoft.Extensions.Logging;
 
 namespace RitoAPI.Controllers
 {
@@ -8,10 +9,12 @@ namespace RitoAPI.Controllers
 	public class SummonerController : ControllerBase
 	{
 		private SummonerService _summonerService;
+		private readonly ILogger<SummonerController> _logger;
 
-		public SummonerController(SummonerService summonerService)
+		public SummonerController(SummonerService summonerService, ILogger<SummonerController> logger)
 		{
 			_summonerService = summonerService;
+			_logger = logger;
 		}
 
 		[HttpGet("name/{name}/{region}")]
@@ -21,9 +24,11 @@ namespace RitoAPI.Controllers
 
 			if (summoner == null)
 			{
+				_logger.LogWarning($"GetSummonerByName, region = {region}, name = {name} returned an error");
 				return BadRequest();
 			}
 
+			_logger.LogInformation($"GetSummonerByName, region = {region}, name = {name} was executed successfully");
 			return Ok(summoner);
 		}
 

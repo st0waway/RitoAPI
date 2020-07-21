@@ -3,16 +3,19 @@ using Newtonsoft.Json;
 using RitoAPI.Models;
 using System.IO;
 using System.Net;
+using Microsoft.Extensions.Logging;
 
 namespace RitoAPI.Services
 {
 	public class SummonerService
 	{
 		private readonly string _apiKey;
+		private readonly ILogger<SummonerService> _logger;
 
-		public SummonerService(IOptions<UserConfig> userConfigAccessor)
+		public SummonerService(IOptions<UserConfig> userConfigAccessor, ILogger<SummonerService> logger)
 		{
 			_apiKey = userConfigAccessor.Value.APIKey;
+			_logger = logger;
 		}
 
 		public SummonerDTO GetSummonerByName(string region, string name)
@@ -22,13 +25,12 @@ namespace RitoAPI.Services
 			try
 			{
 				var request = WebRequest.Create(url) as HttpWebRequest;
-
 				using (var stream = request.GetResponse().GetResponseStream())
 				{
 					using (var streamReader = new StreamReader(stream))
 					{
 						var summonerAsJson = streamReader.ReadToEnd();
-						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);
+						var summoner = JsonConvert.DeserializeObject<SummonerDTO>(summonerAsJson);						
 						return summoner;
 					}
 				}

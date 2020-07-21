@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RitoAPI.Models;
-using RitoAPI.Repositories;
 using RitoAPI.Services;
+using Serilog;
 
 namespace RitoAPI
 {
@@ -33,15 +33,6 @@ namespace RitoAPI
 
 			var userConfig = _configuration.GetSection("UserConfig");
 			services.Configure<UserConfig>(userConfig);
-			services.AddSingleton<ChampionMasteryRepo>();
-			services.AddSingleton<ChampionRepo>();
-			services.AddSingleton<ClashRepo>();
-			services.AddSingleton<LeagueExpRepo>();
-			services.AddSingleton<LolStatusRepo>();
-			services.AddSingleton<LolRankedRepo>();
-			services.AddSingleton<SpectatorRepo>();
-			services.AddSingleton<SummonerRepo>();
-			services.AddSingleton<MatchRepo>();
 			services.AddSingleton<SummonerService>();
 			services.AddSingleton<ChampionService>();
 			services.AddSingleton<ChampionMasteryService>();
@@ -76,6 +67,8 @@ namespace RitoAPI
 			});
 
 			app.UseHttpsRedirection();
+
+			app.UseSerilogRequestLogging();
 
 			app.UseRouting();
 
