@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -8,15 +10,18 @@ namespace RitoAPI.Controllers
     public class LeagueExpController : ControllerBase
     {
         private LeagueExpService _leagueExpService;
+        private readonly ILogger<SummonerController> _logger;
 
-        public LeagueExpController(LeagueExpService leagueExpService)
+        public LeagueExpController(LeagueExpService leagueExpService, ILogger<SummonerController> logger)
         {
             _leagueExpService = leagueExpService;
+            _logger = logger;
         }
 
         [HttpGet("{queue}/{tier}/{division}/{region}")]
         public IActionResult GetLeagueExp(string region = "euw1", string queue = "RANKED_SOLO_5x5", string tier = "GOLD", string division = "IV")
         {
+            _logger.LogInformation("GetLeagueExp, region = {region}, queue = {queue}, tier = {tier}, division = {division}", region, queue, tier, division);
             var leagueInfo = _leagueExpService.GetLeagueExp(region , queue, tier, division);
 
             if (leagueInfo == null)
