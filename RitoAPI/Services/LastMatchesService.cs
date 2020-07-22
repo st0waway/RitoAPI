@@ -48,6 +48,19 @@ namespace RitoAPI.Services
 
 			return lastMatches;
 		}
+
+		public List<LastMatches> GetMatchesForMultipleSummoners(string region, List<string> summonerNames)
+		{
+			var multipleMatches = new List<LastMatches>();
+			foreach (var summonerName in summonerNames)
+			{
+				var summonerMatches = GetLastMatchesBySummoner(region, summonerName);
+				multipleMatches.Add(summonerMatches);
+			}
+
+			return multipleMatches;
+		}		
+
 		public static DateTime UnixTimeStampToDateTime(double gameCreation, double gameDuration)
 		{			
 			var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);

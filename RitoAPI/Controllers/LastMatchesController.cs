@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-using RitoAPI.Models;
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -27,22 +26,27 @@ namespace RitoAPI.Controllers
         {            
             _logger.LogInformation("GetLastMatchesBySummoner, region = {region}, summonerName = {summonerName}", region, summonerName);
             var matches = _lastMatchesService.GetLastMatchesBySummoner(region, summonerName);
+
+            if (matches == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(matches);
         }
 
         [HttpPost("multiple-summoners/{region}")]
         public IActionResult GetMatchesForMultipleSummoners(string region, [FromBody]List<string> summonerNames)
         {
-            var summonerNamesAsString = String.Join(", ", summonerNames.ToArray());
-            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", region, summonerNamesAsString);			
-            var lobbyMatches = new List<LastMatches>();
-			foreach (var summonerName in summonerNames)
-			{
-                var summonerMatches = _lastMatchesService.GetLastMatchesBySummoner(region, summonerName);
-                lobbyMatches.Add(summonerMatches);
+            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", region, String.Join(", ", summonerNames.ToArray()));
+            var multipleSummonerMatches = _lastMatchesService.GetMatchesForMultipleSummoners(region, summonerNames);
+            
+            if (multipleSummonerMatches == null)
+            {
+                return BadRequest();
             }
 
-            return Ok(lobbyMatches);
+            return Ok(multipleSummonerMatches);
         }
     }    
 }
