@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -8,15 +10,18 @@ namespace RitoAPI.Controllers
     public class LolStatusController : ControllerBase
     {
         private LolStatusService _lolStatusService;
+        private readonly ILogger<SummonerController> _logger;
 
-        public LolStatusController(LolStatusService lolStatusService)
+        public LolStatusController(LolStatusService lolStatusService, ILogger<SummonerController> logger)
         {
             _lolStatusService = lolStatusService;
+            _logger = logger;
         }
 
-        [HttpGet("/{region}")]
+        [HttpGet("{region}")]
         public IActionResult GetLeagueStatus(string region = "EUW1")
         {
+            _logger.LogInformation("GetLeagueStatus, region = {region}", region);
             var shardStatus = _lolStatusService.GetLeagueStatus(region);
 
             if (shardStatus == null)
