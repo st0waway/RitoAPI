@@ -34,7 +34,7 @@ namespace RitoAPI.Controllers
         public IActionResult GetMatchesForMultipleSummoners(string region, [FromBody]List<string> summonerNames)
         {
             var summonerNamesAsString = String.Join(", ", summonerNames.ToArray());
-            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, {summonerNames} ", region, summonerNamesAsString);			
+            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", region, summonerNamesAsString);			
             var lobbyMatches = new List<LastMatches>();
 			foreach (var summonerName in summonerNames)
 			{
