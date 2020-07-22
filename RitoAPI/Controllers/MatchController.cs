@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -8,15 +10,18 @@ namespace RitoAPI.Controllers
     public class MatchController : ControllerBase
     {
         private MatchService _matchService;
+        private readonly ILogger<SummonerController> _logger;
 
-        public MatchController(MatchService matchService)
+        public MatchController(MatchService matchService, ILogger<SummonerController> logger)
         {
             _matchService = matchService;
+            _logger = logger;
         }
 
         [HttpGet("/by-accountId/{id}/{region}")]
         public IActionResult GetMatchlistByAccountId(string region = "euw1", string id = "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI")
         {
+            _logger.LogInformation("GetMatchlistByAccountId, region = {region}, id = {id}", region, id);
             var matchList = _matchService.GetMatchlistByAccountId(region, id);
 
             if (matchList == null)
@@ -30,6 +35,7 @@ namespace RitoAPI.Controllers
         [HttpGet("/by-matchid/{matchid}/{region}")]
         public IActionResult GetMatchByMatchId(string region= "euw1", string matchid = "4688093085")
         {
+            _logger.LogInformation("GetMatchByMatchId, region = {region}, matchid = {matchid}", region, matchid);
             var match = _matchService.GetMatchByMatchId(region, matchid);
 
             if (match == null)
