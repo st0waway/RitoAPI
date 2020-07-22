@@ -37,7 +37,7 @@ namespace RitoAPI.Controllers
 		[HttpGet("by-summoner/{encryptedSummonerId}/by-champion/{championId}/{region}")]
 		public IActionResult GetChampionMasteryByIdandChampionId(string region = "euw1", string encryptedSummonerId = "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", long championId = 1)
 		{
-			_logger.LogInformation("GetChampionsMasteryById, region = {region}, encryptedSummonerId = {encryptedSummonerId}, championId = {championId}", region, encryptedSummonerId, championId);
+			_logger.LogInformation("GetChampionMasteryByIdandChampionId, region = {region}, encryptedSummonerId = {encryptedSummonerId}, championId = {championId}", region, encryptedSummonerId, championId);
 			var championMastery = _championMasteryService.GetChampionMasteryByIdandChampionId(region, encryptedSummonerId, championId);
 
 			if (championMastery == null)
