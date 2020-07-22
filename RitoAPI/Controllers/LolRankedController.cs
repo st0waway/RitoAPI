@@ -10,9 +10,9 @@ namespace RitoAPI.Controllers
     public class LolRankedController : ControllerBase
     {
         private LolRankedService _lolRankedService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<LolRankedController> _logger;
 
-        public LolRankedController(LolRankedService lolRankedService, ILogger<SummonerController> logger)
+        public LolRankedController(LolRankedService lolRankedService, ILogger<LolRankedController> logger)
         {
             _lolRankedService = lolRankedService;
             _logger = logger;

@@ -12,9 +12,9 @@ namespace RitoAPI.Controllers
 	public class ChampionMasteryController : ControllerBase
 	{
 		private ChampionMasteryService _championMasteryService;
-		private readonly ILogger<SummonerController> _logger;
+		private readonly ILogger<ChampionMasteryController> _logger;
 
-		public ChampionMasteryController(ChampionMasteryService championMasteryService, ILogger<SummonerController> logger)
+		public ChampionMasteryController(ChampionMasteryService championMasteryService, ILogger<ChampionMasteryController> logger)
 		{
 			_championMasteryService = championMasteryService;
 			_logger = logger;

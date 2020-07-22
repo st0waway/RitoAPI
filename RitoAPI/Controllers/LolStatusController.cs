@@ -10,9 +10,9 @@ namespace RitoAPI.Controllers
     public class LolStatusController : ControllerBase
     {
         private LolStatusService _lolStatusService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<LolStatusController> _logger;
 
-        public LolStatusController(LolStatusService lolStatusService, ILogger<SummonerController> logger)
+        public LolStatusController(LolStatusService lolStatusService, ILogger<LolStatusController> logger)
         {
             _lolStatusService = lolStatusService;
             _logger = logger;

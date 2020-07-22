@@ -10,9 +10,9 @@ namespace RitoAPI.Controllers
 	public class AccountController : ControllerBase
 	{
 		private AccountService _accountService;
-		private readonly ILogger<SummonerController> _logger;
+		private readonly ILogger<AccountController> _logger;
 
-		public AccountController(AccountService accountService, ILogger<SummonerController> logger)
+		public AccountController(AccountService accountService, ILogger<AccountController> logger)
 		{
 			_accountService = accountService;
 			_logger = logger;

@@ -12,9 +12,9 @@ namespace RitoAPI.Controllers
     public class ClashController : ControllerBase
     {
         private ClashService _clashService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<ClashController> _logger;
 
-        public ClashController(ClashService clashService, ILogger<SummonerController> logger)
+        public ClashController(ClashService clashService, ILogger<ClashController> logger)
         {
             _clashService = clashService;
             _logger = logger;

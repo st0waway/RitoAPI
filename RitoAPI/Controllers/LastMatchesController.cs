@@ -12,9 +12,9 @@ namespace RitoAPI.Controllers
     public class LastMatchesController : ControllerBase
 	{
         private LastMatchesService _lastMatchesService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<LastMatchesController> _logger;
 
-        public LastMatchesController(LastMatchesService lastMatchesService, ILogger<SummonerController> logger)
+        public LastMatchesController(LastMatchesService lastMatchesService, ILogger<LastMatchesController> logger)
         {
             _lastMatchesService = lastMatchesService;
             _logger = logger;

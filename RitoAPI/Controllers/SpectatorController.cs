@@ -9,9 +9,9 @@ namespace RitoAPI.Controllers
     public class SpectatorController : ControllerBase
     {
         private SpectatorService _spectatorService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<SpectatorController> _logger;
 
-        public SpectatorController(SpectatorService spectatorService, ILogger<SummonerController> logger)
+        public SpectatorController(SpectatorService spectatorService, ILogger<SpectatorController> logger)
         {
             _spectatorService = spectatorService;
             _logger = logger;

@@ -10,9 +10,9 @@ namespace RitoAPI.Controllers
     public class MatchController : ControllerBase
     {
         private MatchService _matchService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<MatchController> _logger;
 
-        public MatchController(MatchService matchService, ILogger<SummonerController> logger)
+        public MatchController(MatchService matchService, ILogger<MatchController> logger)
         {
             _matchService = matchService;
             _logger = logger;

@@ -10,9 +10,9 @@ namespace RitoAPI.Controllers
     public class LeagueExpController : ControllerBase
     {
         private LeagueExpService _leagueExpService;
-        private readonly ILogger<SummonerController> _logger;
+        private readonly ILogger<LeagueExpController> _logger;
 
-        public LeagueExpController(LeagueExpService leagueExpService, ILogger<SummonerController> logger)
+        public LeagueExpController(LeagueExpService leagueExpService, ILogger<LeagueExpController> logger)
         {
             _leagueExpService = leagueExpService;
             _logger = logger;
