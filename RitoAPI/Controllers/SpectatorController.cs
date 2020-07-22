@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -7,15 +9,18 @@ namespace RitoAPI.Controllers
     public class SpectatorController : ControllerBase
     {
         private SpectatorService _spectatorService;
+        private readonly ILogger<SummonerController> _logger;
 
-        public SpectatorController(SpectatorService spectatorService)
+        public SpectatorController(SpectatorService spectatorService, ILogger<SummonerController> logger)
         {
             _spectatorService = spectatorService;
+            _logger = logger;
         }
 
         [HttpGet("spectate/{id}/{region}")]
         public IActionResult GetGameInfo(string region = "euw1",string id = "fYjvBkqrZjvJ54r6tpH0wY2-CoNQFc5lIW92E-nFnUClTPE")
         {
+            _logger.LogInformation("GetGameInfo, region = {region}, id = {id}", region, id);
             var gameInfo = _spectatorService.GetGameInfo(region, id);
 
             if (gameInfo == null)
@@ -29,6 +34,7 @@ namespace RitoAPI.Controllers
         [HttpGet("featured-games/{region}")]
         public IActionResult GetFeaturedGames(string region = "euw1")
         {
+            _logger.LogInformation("GetFeaturedGames, region = {region}", region);
             var featuredGamesInfo = _spectatorService.GetFeaturedGames(region);
 
             if (featuredGamesInfo == null)
