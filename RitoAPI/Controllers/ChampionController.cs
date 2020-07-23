@@ -20,7 +20,6 @@ namespace RitoAPI.Controllers
 		[HttpGet("champion-rotations/{region}")]
 		public IActionResult GetFreeChampionInfo(string region = "euw1")
 		{
-			_logger.LogInformation("GetFreeChampionInfo, region = {region}", region);
 			var freeChampRotation = _championService.GetFreeChampionInfo(region);
 
 			if (freeChampRotation == null)

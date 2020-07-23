@@ -21,7 +21,6 @@ namespace RitoAPI.Controllers
         [HttpGet("{region}")]
         public IActionResult GetLeagueStatus(string region = "EUW1")
         {
-            _logger.LogInformation("GetLeagueStatus, region = {region}", region);
             var shardStatus = _lolStatusService.GetLeagueStatus(region);
 
             if (shardStatus == null)

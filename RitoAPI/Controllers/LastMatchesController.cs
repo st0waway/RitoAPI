@@ -24,7 +24,6 @@ namespace RitoAPI.Controllers
         [HttpPost("one-summoner")]
         public IActionResult GetLastMatchesBySummoner([FromBody]LastMatchSummoner summoner)
         {            
-            _logger.LogInformation("GetLastMatchesBySummoner, region = {region}, summonerName = {summonerName}", summoner.region, summoner.summonerName);
             var matches = _lastMatchesService.GetLastMatchesBySummoner(summoner.region, summoner.summonerName);
 
             if (matches == null)
@@ -38,7 +37,6 @@ namespace RitoAPI.Controllers
         [HttpPost("multiple-summoners")]
         public IActionResult GetMatchesForMultipleSummoners([FromBody]LastMatchSummoners summoners)
         {
-            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", summoners.region, String.Join(", ", summoners.summonerNames.ToArray()));
             var multipleSummonerMatches = _lastMatchesService.GetMatchesForMultipleSummoners(summoners.region, summoners.summonerNames);
             
             if (multipleSummonerMatches == null)

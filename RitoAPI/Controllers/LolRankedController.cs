@@ -21,7 +21,6 @@ namespace RitoAPI.Controllers
         [HttpGet("/by-region/{region}")]
         public IActionResult GetPlayersInMasterTier(string region = "europe")
         {
-            _logger.LogInformation("GetPlayersInMasterTier, region = {region}", region);
             var playersInMasterTier = _lolRankedService.GetPlayersInMasterTier(region);
 
             if (playersInMasterTier == null)

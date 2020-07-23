@@ -70,7 +70,7 @@ namespace RitoAPI.Middleware
 								   $"Host: {context.Request.Host} " +
 								   $"Path: {context.Request.Path} " +
 								   $"QueryString: {context.Request.QueryString} " +
-								   "Response Body: {text}", text);
+								   $"Response Body: {text}");
 			await responseBody.CopyToAsync(originalBodyStream);
 		}
 	}
