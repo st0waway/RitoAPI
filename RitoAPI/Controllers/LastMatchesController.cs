@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+using RitoAPI.Models;
 using RitoAPI.Services;
 
 namespace RitoAPI.Controllers
@@ -21,11 +22,11 @@ namespace RitoAPI.Controllers
             _logger = logger;
         }
 
-        [HttpPost("one-summoner/{region}")]
-        public IActionResult GetLastMatchesBySummoner(string region, [FromBody]string summonerName)
+        [HttpPost("one-summoner")]
+        public IActionResult GetLastMatchesBySummoner([FromBody]LastMatchSummoner summoner)
         {            
-            _logger.LogInformation("GetLastMatchesBySummoner, region = {region}, summonerName = {summonerName}", region, summonerName);
-            var matches = _lastMatchesService.GetLastMatchesBySummoner(region, summonerName);
+            _logger.LogInformation("GetLastMatchesBySummoner, region = {region}, summonerName = {summonerName}", summoner.region, summoner.summonerName);
+            var matches = _lastMatchesService.GetLastMatchesBySummoner(summoner.region, summoner.summonerName);
 
             if (matches == null)
             {
@@ -35,11 +36,11 @@ namespace RitoAPI.Controllers
             return Ok(matches);
         }
 
-        [HttpPost("multiple-summoners/{region}")]
-        public IActionResult GetMatchesForMultipleSummoners(string region, [FromBody]List<string> summonerNames)
+        [HttpPost("multiple-summoners")]
+        public IActionResult GetMatchesForMultipleSummoners([FromBody]LastMatchSummoners summoners)
         {
-            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", region, String.Join(", ", summonerNames.ToArray()));
-            var multipleSummonerMatches = _lastMatchesService.GetMatchesForMultipleSummoners(region, summonerNames);
+            _logger.LogInformation("GetMatchesForMultipleSummoners, region = {region}, summonerNames = {summonerNames} ", summoners.region, String.Join(", ", summoners.summonerNames.ToArray()));
+            var multipleSummonerMatches = _lastMatchesService.GetMatchesForMultipleSummoners(summoners.region, summoners.summonerNames);
             
             if (multipleSummonerMatches == null)
             {
