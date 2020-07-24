@@ -8,11 +8,11 @@ using Xunit;
 
 namespace RitoAPI.Tests
 {
-	public class LastMatchesServiceTest : IClassFixture<WebApplicationFactory<Startup>>
+	public class LastMatchesServiceTests : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 
-		public LastMatchesServiceTest(WebApplicationFactory<Startup> factory)
+		public LastMatchesServiceTests(WebApplicationFactory<Startup> factory)
 		{
 			_factory = factory;
 		}

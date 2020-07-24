@@ -4,11 +4,11 @@ using Xunit;
 
 namespace RitoAPI.Tests
 {
-	public class AccountServiceTest : IClassFixture<WebApplicationFactory<Startup>>
+	public class AccountServiceTests : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 
-		public AccountServiceTest(WebApplicationFactory<Startup> factory)
+		public AccountServiceTests(WebApplicationFactory<Startup> factory)
 		{
 			_factory = factory;
 		}
