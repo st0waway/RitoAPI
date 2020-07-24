@@ -14,16 +14,19 @@ namespace RitoAPI.Tests
 			_factory = factory;
 		}
 
-		[Fact]
-		public void GetLeagueStatus()
+		[Theory]
+		[InlineData("euw1", "prod.euw1.lol.riotgames.com")]
+		[InlineData("ru", "prod.ru.lol.riotgames.com")]
+		[InlineData("oc1", "prod.oc1.lol.riotgames.com")]
+		[InlineData("jp1", "prod.jp1.lol.riotgames.com")]
+		[InlineData("na1", "prod.na1.lol.riotgames.com")]
+		public void GetLeagueStatus_ReturnsCorrectHostname(string region, string expected)
 		{
 			var service = (LolStatusService)_factory.Services.GetService(typeof(LolStatusService));
-			var shardStatus = service.GetLeagueStatus("euw1");
-			Assert.IsType<ShardStatus>(shardStatus);
-			Assert.Equal("prod.euw1.lol.riotgames.com", shardStatus.hostname);
-			Assert.Equal("EU West", shardStatus.name);
-			Assert.Equal("eu", shardStatus.region_tag);
-			Assert.Equal("euw", shardStatus.slug);
+			var shardStatus = service.GetLeagueStatus(region);
+			var actual = shardStatus.hostname;
+
+			Assert.Equal(expected, actual);
 		}
 	}
 }
