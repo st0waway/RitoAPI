@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using RitoAPI.Models;
+﻿
+using Microsoft.AspNetCore.Mvc.Testing;
+
 using RitoAPI.Services;
+
 using Xunit;
 
 namespace RitoAPI.Tests
@@ -15,26 +17,32 @@ namespace RitoAPI.Tests
 		}
 
 		[Fact]
-		public void GetGameInfo()
+		public void GetGameInfo_ShouldHaveSameGameIdAsATheFeaturedGame()
 		{
 			var service = (SpectatorService)_factory.Services.GetService(typeof(SpectatorService));
 			var summonerService = (SummonerService)_factory.Services.GetService(typeof(SummonerService));
-			var featuredGames = service.GetFeaturedGames("euw1");
+			var region = "euw1";
+			var featuredGames = service.GetFeaturedGames(region);
+			var expected = featuredGames.gameList[0].gameId;
+
 			var activeSummonerName = featuredGames.gameList[0].participants[0].summonerName;
-			var summoner = summonerService.GetSummonerByName("euw1", activeSummonerName);
-			var summonerId = summoner.Id;
-			var gameInfo = service.GetGameInfo("euw1", summonerId);
-			Assert.IsType<CurrentGameInfo>(gameInfo);
-			Assert.Equal(featuredGames.gameList[0].gameId, gameInfo.gameId);
+			var summoner = summonerService.GetSummonerByName(region, activeSummonerName);
+			var gameInfo = service.GetGameInfo(region, summoner.Id);
+			var actual = gameInfo.gameId;
+
+			Assert.Equal(expected, actual);
 		}
 
 		[Fact]
-		public void GetFeaturedGames()
+		public void GetFeaturedGames_ShouldHaveFiveGames()
 		{
+			var expected = 5;
+			
 			var service = (SpectatorService)_factory.Services.GetService(typeof(SpectatorService));
 			var featuredGames = service.GetFeaturedGames("euw1");
-			Assert.IsType<FeaturedGames>(featuredGames);
-			Assert.Equal(5, featuredGames.gameList.Count);
+			var actual = featuredGames.gameList.Count;
+
+			Assert.Equal(expected, actual);
 		}
 	}
 }
