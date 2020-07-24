@@ -4,11 +4,11 @@ using Xunit;
 
 namespace RitoAPI.Tests
 {
-	public class ChampionMasteryServiceShould : IClassFixture<WebApplicationFactory<Startup>>
+	public class ChampionMasteryServiceTest : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 
-		public ChampionMasteryServiceShould(WebApplicationFactory<Startup> factory)
+		public ChampionMasteryServiceTest(WebApplicationFactory<Startup> factory)
 		{
 			_factory = factory;
 		}

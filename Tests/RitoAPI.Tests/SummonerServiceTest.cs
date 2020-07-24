@@ -5,11 +5,11 @@ using Xunit;
 
 namespace RitoAPI.Tests
 {
-	public class SummonerServiceShould : IClassFixture<WebApplicationFactory<Startup>>
+	public class SummonerServiceTest : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 
-		public SummonerServiceShould(WebApplicationFactory<Startup> factory)
+		public SummonerServiceTest(WebApplicationFactory<Startup> factory)
 		{
 			_factory = factory;
 		}

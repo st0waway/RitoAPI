@@ -6,11 +6,11 @@ using Xunit;
 
 namespace RitoAPI.Tests
 {
-	public class MatchServiceShould : IClassFixture<WebApplicationFactory<Startup>>
+	public class MatchServiceTest : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 
-		public MatchServiceShould(WebApplicationFactory<Startup> factory)
+		public MatchServiceTest(WebApplicationFactory<Startup> factory)
 		{
 			_factory = factory;
 		}
