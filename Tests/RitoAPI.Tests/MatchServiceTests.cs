@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
+
 using RitoAPI.Models;
 using RitoAPI.Services;
+
 using Xunit;
 
 namespace RitoAPI.Tests
@@ -15,23 +16,35 @@ namespace RitoAPI.Tests
 			_factory = factory;
 		}
 
-		[Fact]
-		public void GetMatchlistByAccountId()
+		[Theory]
+		[InlineData("euw1", "NGh2899uPTAjNcpigwqbR9jlOqaJovDEtUhE4GTjzb7DdKA")]
+		[InlineData("na1", "cMeedg7QLIaH2e71EpImpBmgiOcWVjzY6H7ubcQh9a2dVTI")]
+		[InlineData("ru", "vATAfvw3BMbMKky6iMHtghHgAovcphQ8xxHmvK8yj_H9jhKhEzlPYAug")]
+		[InlineData("oc1", "xaU9a1WoFS6SX3IpwNyoMgjHitwYKxxg89BsQx8vdJQWvuI")]
+		[InlineData("jp1", "fnscZct1rXvfjLWPzta9VDAzeonQEWXct9N6eXQHbHV3YaIGIXvinyTx")]
+		public void GetMatchlistByAccountId_AccountHas100Games(string region, string accountId)
 		{
+			var expected = 100;
+			
 			var service = (MatchService)_factory.Services.GetService(typeof(MatchService));
-			var gamesOnAccount = service.GetMatchlistByAccountId("euw1", "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI");
-			Assert.IsType<MatchlistDto>(gamesOnAccount);
-			Assert.Equal(100, gamesOnAccount.matches.Count);
-			var topGames = gamesOnAccount.matches.Where(x => x.lane == "TOP");
-			Assert.NotEmpty(topGames);
+			var gamesOnAccount = service.GetMatchlistByAccountId(region, accountId);
+			var actual = gamesOnAccount.matches.Count;
+
+			Assert.Equal(expected, actual);
 		}
 
-		[Fact]
-		public void GetMatchByMatchId()
+		[Theory]
+		[InlineData("euw1", "NGh2899uPTAjNcpigwqbR9jlOqaJovDEtUhE4GTjzb7DdKA")]
+		[InlineData("na1", "cMeedg7QLIaH2e71EpImpBmgiOcWVjzY6H7ubcQh9a2dVTI")]
+		[InlineData("ru", "vATAfvw3BMbMKky6iMHtghHgAovcphQ8xxHmvK8yj_H9jhKhEzlPYAug")]
+		[InlineData("oc1", "xaU9a1WoFS6SX3IpwNyoMgjHitwYKxxg89BsQx8vdJQWvuI")]
+		[InlineData("jp1", "fnscZct1rXvfjLWPzta9VDAzeonQEWXct9N6eXQHbHV3YaIGIXvinyTx")]
+		public void GetMatchByMatchId_ReturnsAMatch(string region, string accountId)
 		{
 			var service = (MatchService)_factory.Services.GetService(typeof(MatchService));
-			var gamesOnAccount = service.GetMatchlistByAccountId("euw1", "55FIELFqN-ORp2SbiBPMDHE3ZwI4xkZCx3w7eka3SZ6yupI");
-			var match = service.GetMatchByMatchId("euw1", gamesOnAccount.matches[0].gameId.ToString());
+			var gamesOnAccount = service.GetMatchlistByAccountId(region, accountId);
+			var match = service.GetMatchByMatchId(gamesOnAccount.matches[0].platformId, gamesOnAccount.matches[0].gameId.ToString());
+
 			Assert.IsType<MatchDto>(match);
 		}
 	}
