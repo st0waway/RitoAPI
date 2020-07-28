@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using RitoAPI.Models;
+
 using RitoAPI.Services;
+
 using Xunit;
 
 namespace RitoAPI.Tests

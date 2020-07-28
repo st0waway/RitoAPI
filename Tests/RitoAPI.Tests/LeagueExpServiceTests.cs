@@ -16,7 +16,6 @@ namespace RitoAPI.Tests
 		}
 
 		[Theory]
-		
 		[InlineData("JP1", "RANKED_SOLO_5x5", "IRON", "IV")]
 		[InlineData("LA1", "RANKED_SOLO_5x5", "SILVER", "III")]
 		[InlineData("EUW1", "RANKED_SOLO_5x5", "GOLD", "IV")]
@@ -30,7 +29,7 @@ namespace RitoAPI.Tests
 			var leagueQueueEntry = service.GetLeagueExp(region, queue, tier, division);
 			var actual = leagueQueueEntry[0].tier;
 
-			Assert.Equal(expected, actual);			
+			Assert.Equal(expected, actual);
 		}
 	}
 }
