@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Testing;
-using RitoAPI.Models;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
+
 using RitoAPI.Services;
+
 using Xunit;
 
 namespace RitoAPI.Tests
@@ -15,15 +15,22 @@ namespace RitoAPI.Tests
 			_factory = factory;
 		}
 
-		[Fact]
-		public void GetLeagueExp()
+		[Theory]
+		
+		[InlineData("JP1", "RANKED_SOLO_5x5", "IRON", "IV")]
+		[InlineData("LA1", "RANKED_SOLO_5x5", "SILVER", "III")]
+		[InlineData("EUW1", "RANKED_SOLO_5x5", "GOLD", "IV")]
+		[InlineData("RU", "RANKED_SOLO_5x5", "MASTER", "I")]
+		[InlineData("KR", "RANKED_SOLO_5x5", "CHALLENGER", "I")]
+		public void GetLeagueExp_ReturnsPlayersFromCorrectTier(string region, string queue, string tier, string division)
 		{
+			var expected = tier;
+
 			var service = (LeagueExpService)_factory.Services.GetService(typeof(LeagueExpService));
-			var leagueQueueEntry = service.GetLeagueExp("euw1","RANKED_SOLO_5x5", "PLATINUM", "IV");
-			Assert.IsType<List<LeagueEntryDTO>>(leagueQueueEntry);
-			Assert.Equal("PLATINUM", leagueQueueEntry[0].tier);
-			Assert.Equal("PLATINUM", leagueQueueEntry[5].tier);
-			Assert.Equal("PLATINUM", leagueQueueEntry[12].tier);
+			var leagueQueueEntry = service.GetLeagueExp(region, queue, tier, division);
+			var actual = leagueQueueEntry[0].tier;
+
+			Assert.Equal(expected, actual);			
 		}
 	}
 }
