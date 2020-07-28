@@ -20,7 +20,7 @@ namespace RitoAPI.Tests
 		[InlineData("ASIA", 1)]
 		[InlineData("EUROPE", 5)]
 		[InlineData("SEA", 10)]
-		public void GetPlayersInMasterTier(string region, int rank)
+		public void GetPlayersInMasterTier_ReturnsCorrectRank(string region, int rank)
 		{
 			var expected = rank;
 
