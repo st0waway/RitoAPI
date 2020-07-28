@@ -17,12 +17,20 @@ namespace RitoAPI.Tests
 			_factory = factory;
 		}
 
-		[Fact]
-		public void GetLastMatchesBySummoner()
+		[Theory]
+		[InlineData("euw1", "Lum1x")]
+		[InlineData("na1", "C9 Zven")]
+		[InlineData("ru", "Yu meng")]
+		[InlineData("jp1", "biewanad")]
+		[InlineData("kr", "T1 BurdoI")]
+		public void GetLastMatchesBySummoner_ReturnsCorrectSummonerName(string region, string summonerName )
 		{
+			var expected = summonerName;
 			var service = (LastMatchesService)_factory.Services.GetService(typeof(LastMatchesService));
-			var lastMatchesInfo = service.GetLastMatchesBySummoner("euw1", "Lum1x");
-			Assert.Equal("Lum1x", lastMatchesInfo.summonerName);
+			var lastMatchesInfo = service.GetLastMatchesBySummoner(region, summonerName);
+			var actual = lastMatchesInfo.summonerName;
+			
+			Assert.Equal(expected, actual);
 		}
 
 		[Fact]
