@@ -58,6 +58,7 @@ namespace RitoAPI.Tests
 			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
 			var championMasteryLevel = service.GetChampionMasteryScore(region, summonerId);
 			var actual = championMasteryLevel;
+
 			Assert.True(actual > 5);
 		}
 	}
