@@ -13,15 +13,21 @@ namespace RitoAPI.Tests
 			_factory = factory;
 		}
 
-		[Fact]
-		public void GetChampionsMasteryById()
+		[Theory]
+		[InlineData("euw1", "ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk")]
+		[InlineData("na1", "R84hfPnFbZbisUxqc75-e4dxzIS99ExnjqACgn7b5xzN1E0")]
+		[InlineData("ru", "N8kT7Dgjk2_AGCznbanIkSRtRF9U_g3oRCn3BHO-zsWBVwg")]
+		[InlineData("oc1", "ySQv_pKT-lhCNa-0Swb_Gm7-s7vkTpOCkPZ7QZubHJqq")]
+		[InlineData("jp1", "v7KFUgdLNT49aR6vVyO2zOxbab_INOUwWkOpMJElPYTdPTY")]
+		public void GetChampionsMasteryById_ReturnsInfoForCorrectId(string region, string summonerId)
 		{
+			var expected = summonerId;
+
 			var service = (ChampionMasteryService)_factory.Services.GetService(typeof(ChampionMasteryService));
-			var championMasteryList = service.GetChampionsMasteryById("euw1" ,"ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk");
-			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[0].summonerId);
-			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[5].summonerId);
-			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[10].summonerId);
-			Assert.Equal("ohb-yL5WsfR7pAh0psgAspPTBh3MuN2vdNIMxNC02AE2QVk", championMasteryList[50].summonerId);
+			var championMasteryList = service.GetChampionsMasteryById(region, summonerId);
+			var actual = championMasteryList[0].summonerId;
+			
+			Assert.Equal(expected, actual);
 		}
 
 		[Fact]
