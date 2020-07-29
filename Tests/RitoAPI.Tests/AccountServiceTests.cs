@@ -30,14 +30,19 @@ namespace RitoAPI.Tests
 			Assert.Equal(expected, actual);
 		}
 
-		[Fact]
-		public void GetAccountByRiotId()
+		[Theory]
+		[InlineData("europe", "RGE lnspired", "EUW")]
+		[InlineData("europe", "C9 Zven", "EUW")]
+		[InlineData("europe", "Choke on my Fizz", "EUW")]
+		public void GetAccountByRiotId_ReturnsCorrecttagLine(string region, string name, string tagLine)
 		{
+			var expected = tagLine;
+
 			var service = (AccountService)_factory.Services.GetService(typeof(AccountService));
-			var account = service.GetAccountByRiotId("europe", "Lum1x", "EUW");
-			Assert.Equal("Lum1x", account.gameName);
-			Assert.Equal("6N57LsQo6kOBNuz8yK8_lJ0KJmEzSH5cF2OhOfmwpQIOza2sZPb_vMb75A0wwdYSONBX26iNMburSA", account.puuid);
-			Assert.Equal("EUW", account.tagLine);
+			var account = service.GetAccountByRiotId(region, name, tagLine);
+			var actual = account.tagLine;
+
+			Assert.Equal(expected, actual);
 		}
 
 		[Theory]
