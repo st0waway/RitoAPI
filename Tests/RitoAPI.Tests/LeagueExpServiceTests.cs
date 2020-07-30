@@ -19,7 +19,7 @@ namespace RitoAPI.Tests
 		[InlineData("JP1", "RANKED_SOLO_5x5", "IRON", "IV")]
 		[InlineData("LA1", "RANKED_SOLO_5x5", "SILVER", "III")]
 		[InlineData("EUW1", "RANKED_SOLO_5x5", "GOLD", "IV")]
-		[InlineData("RU", "RANKED_SOLO_5x5", "MASTER", "I")]
+		[InlineData("RU", "RANKED_SOLO_5x5", "PLATINUM", "I")]
 		[InlineData("KR", "RANKED_SOLO_5x5", "CHALLENGER", "I")]
 		public void GetLeagueExp_ReturnsPlayersFromCorrectTier(string region, string queue, string tier, string division)
 		{
