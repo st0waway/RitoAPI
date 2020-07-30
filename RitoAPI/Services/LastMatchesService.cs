@@ -45,7 +45,6 @@ namespace RitoAPI.Services
 				time = time
 			};
 
-
 			return lastMatches;
 		}
 
@@ -69,7 +68,4 @@ namespace RitoAPI.Services
 			return gameEndTime;
 		}
 	}
-
-
-
 }
