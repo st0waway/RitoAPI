@@ -34,13 +34,13 @@ namespace RitoAPI.Tests
 			Assert.Equal(expected, actual);
 		}
 
-		[Fact]
-		public void GetMatchesForMultipleSummoners()
+		[Theory]
+		[InlineData("euw1", "Lum1x", "Dimodead")]
+		public void GetMatchesForMultipleSummoners_ReturnsCorrectSummonerName(string region, string summonerName1, string summonerName2)
 		{
 			var service = (LastMatchesService)_factory.Services.GetService(typeof(LastMatchesService));
-			var summonerNames = new List<string> { "Lum1x", "Dimodead" };
-			var lastMatchesInfo = service.GetMatchesForMultipleSummoners("euw1", summonerNames);
-			Assert.Equal("Lum1x", lastMatchesInfo[0].summonerName);
+			var summonerNames = new List<string> { summonerName1, summonerName2 };
+			var lastMatchesInfo = service.GetMatchesForMultipleSummoners(region, summonerNames);
 			var index = 0;
 			foreach (var summonerName in summonerNames)
 			{
