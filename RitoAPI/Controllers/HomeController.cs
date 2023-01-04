@@ -16,13 +16,12 @@ namespace RitoAPI.Controllers
         [HttpGet]
         public ActionResult<string> CheckIfTextIsEqualToOne(string text)
         {
-            if (text == "1")
+	        if (text == "1")
             {
                 return Ok("1");
-            } else
-            {
-                return NotFound("not 1");
             }
+
+	        return NotFound("not 1");
         }
     }
 }

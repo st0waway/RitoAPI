@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RitoAPI.Models;
@@ -23,17 +24,16 @@ namespace RitoAPI.Services
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;
+                if (request == null) throw new HttpRequestException("The response was null.");
                 request.ContentType = "application/json";
                 request.UserAgent = "Nothing";
-                using (var stream = request.GetResponse().GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        var LeagueExpJson = streamReader.ReadToEnd();
-                        var LeagueExp = JsonConvert.DeserializeObject<List<LeagueEntryDTO>>(LeagueExpJson);
-                        return LeagueExp;
-                    }
-                }
+                using var stream = request.GetResponse().GetResponseStream();
+                if (stream == null) throw new HttpRequestException("The response stream was null.");
+                using var streamReader = new StreamReader(stream);
+                var leagueExpJson = streamReader.ReadToEnd();
+                var leagueExp = JsonConvert.DeserializeObject<List<LeagueEntryDTO>>(leagueExpJson);
+                return leagueExp;
+
             }
             catch (WebException)
             {
